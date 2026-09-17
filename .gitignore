@@ -1,0 +1,34 @@
+# Secrets
+.env
+*.env.*
+!.env.example
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+dist/
+build/
+frontend/dist/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.out
+*.err
+npm-debug.log*
+
+# Local demo credentials
+backend/CampusAI_Demo_Credentials.xlsx
+
+# Private student data
+BCA AD5E.xlsx
