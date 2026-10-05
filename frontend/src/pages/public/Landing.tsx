@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -9,9 +10,27 @@ import {
   MessageCircle,
   Moon,
   Sparkles,
+  Sun,
 } from "lucide-react";
 
 function Landing() {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("campusai-theme") === "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("campusai-dark", darkMode);
+
+    localStorage.setItem(
+      "campusai-theme",
+      darkMode ? "dark" : "light"
+    );
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode((prev) => !prev);
+  };
+
   return (
     <div className="landing-page">
 
@@ -19,6 +38,7 @@ function Landing() {
       <header className="landing-nav">
         <Link to="/" className="landing-brand">
           <span className="landing-brand-mark">C</span>
+
           <span>
             Campus<span>AI</span>
           </span>
@@ -32,8 +52,28 @@ function Landing() {
         </nav>
 
         <div className="landing-nav-actions">
-          <button className="landing-theme-btn" aria-label="Theme">
-            <Moon size={17} />
+
+          {/* ================= THEME BUTTON ================= */}
+          <button
+            type="button"
+            className="landing-theme-btn"
+            aria-label={
+              darkMode
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+            }
+            title={
+              darkMode
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+            }
+            onClick={toggleTheme}
+          >
+            {darkMode ? (
+              <Sun size={17} />
+            ) : (
+              <Moon size={17} />
+            )}
           </button>
 
           <Link to="/login" className="landing-login">
@@ -50,6 +90,7 @@ function Landing() {
       <main>
 
         <section className="landing-hero" id="home">
+
           <div className="landing-hero-content">
 
             <div className="landing-badge">
@@ -70,18 +111,29 @@ function Landing() {
             </p>
 
             <div className="landing-hero-buttons">
-              <Link to="/register" className="landing-primary-btn">
+
+              <Link
+                to="/register"
+                className="landing-primary-btn"
+              >
                 Get Started
                 <ArrowRight size={17} />
               </Link>
 
-              <a href="#how-it-works" className="landing-secondary-btn">
-                <span className="landing-play-icon">▶</span>
+              <a
+                href="#how-it-works"
+                className="landing-secondary-btn"
+              >
+                <span className="landing-play-icon">
+                  ▶
+                </span>
                 Watch Demo
               </a>
+
             </div>
 
             <div className="landing-trust">
+
               <div className="landing-avatars">
                 <span>KS</span>
                 <span>AS</span>
@@ -93,7 +145,9 @@ function Landing() {
                 <strong>+1.2k</strong>
                 <span>Trusted by SRMU Students</span>
               </div>
+
             </div>
+
           </div>
 
           {/* ================= HERO VISUAL ================= */}
@@ -106,8 +160,9 @@ function Landing() {
               />
             </div>
 
-            {/* AI Assistant */}
+            {/* ================= AI ASSISTANT ================= */}
             <div className="landing-float-card landing-ai-card">
+
               <div className="landing-float-icon">
                 <Sparkles size={16} />
               </div>
@@ -118,10 +173,12 @@ function Landing() {
               </div>
 
               <div className="landing-online-dot" />
+
             </div>
 
-            {/* Complaint Submitted */}
+            {/* ================= COMPLAINT SUBMITTED ================= */}
             <div className="landing-float-card landing-success-card">
+
               <div className="landing-success-icon">
                 <CheckCircle2 size={18} />
               </div>
@@ -130,10 +187,12 @@ function Landing() {
                 <strong>Complaint Submitted</strong>
                 <span>AI analysis completed</span>
               </div>
+
             </div>
 
-            {/* Mini Menu */}
+            {/* ================= MINI MENU ================= */}
             <div className="landing-mini-menu">
+
               <div className="landing-mini-menu-title">
                 <span>CampusAI</span>
                 <span className="landing-menu-dot" />
@@ -158,6 +217,7 @@ function Landing() {
                 <CalendarDays size={14} />
                 <span>Timetable</span>
               </div>
+
             </div>
 
             <div className="landing-handwritten">
@@ -166,14 +226,26 @@ function Landing() {
               Companion
             </div>
 
-            <div className="landing-sparkle landing-sparkle-one">✦</div>
-            <div className="landing-sparkle landing-sparkle-two">✦</div>
+            <div className="landing-sparkle landing-sparkle-one">
+              ✦
+            </div>
+
+            <div className="landing-sparkle landing-sparkle-two">
+              ✦
+            </div>
+
           </div>
+
         </section>
 
         {/* ================= FEATURES ================= */}
-        <section className="landing-features" id="features">
+        <section
+          className="landing-features"
+          id="features"
+        >
+
           <div className="landing-section-heading">
+
             <div className="landing-small-label">
               <span />
               Everything you need
@@ -189,11 +261,14 @@ function Landing() {
               One simple platform for a smarter, more connected campus
               experience.
             </p>
+
           </div>
 
           <div className="landing-feature-grid">
 
+            {/* Feature 1 */}
             <div className="landing-feature-card">
+
               <div className="landing-feature-icon">
                 <BrainCircuit size={21} />
               </div>
@@ -209,9 +284,12 @@ function Landing() {
                 AI-powered
                 <ArrowRight size={14} />
               </span>
+
             </div>
 
+            {/* Feature 2 */}
             <div className="landing-feature-card">
+
               <div className="landing-feature-icon">
                 <MessageCircle size={21} />
               </div>
@@ -227,9 +305,12 @@ function Landing() {
                 Always available
                 <ArrowRight size={14} />
               </span>
+
             </div>
 
+            {/* Feature 3 */}
             <div className="landing-feature-card">
+
               <div className="landing-feature-icon">
                 <Building2 size={21} />
               </div>
@@ -245,9 +326,12 @@ function Landing() {
                 Stay updated
                 <ArrowRight size={14} />
               </span>
+
             </div>
 
+            {/* Feature 4 */}
             <div className="landing-feature-card">
+
               <div className="landing-feature-icon">
                 <CalendarDays size={21} />
               </div>
@@ -263,13 +347,19 @@ function Landing() {
                 Stay organized
                 <ArrowRight size={14} />
               </span>
+
             </div>
 
           </div>
+
         </section>
 
         {/* ================= HOW IT WORKS ================= */}
-        <section className="landing-how" id="how-it-works">
+        <section
+          className="landing-how"
+          id="how-it-works"
+        >
+
           <div className="landing-how-content">
 
             <div className="landing-small-label landing-light-label">
@@ -291,47 +381,69 @@ function Landing() {
             <div className="landing-steps">
 
               <div className="landing-step">
+
                 <span>01</span>
+
                 <div>
                   <h3>Report</h3>
-                  <p>Tell us what happened in a simple complaint form.</p>
+
+                  <p>
+                    Tell us what happened in a simple complaint form.
+                  </p>
                 </div>
+
               </div>
 
               <div className="landing-step">
+
                 <span>02</span>
+
                 <div>
                   <h3>AI Understands</h3>
+
                   <p>
                     AI analyses category, urgency, sentiment and routing.
                   </p>
                 </div>
+
               </div>
 
               <div className="landing-step">
+
                 <span>03</span>
+
                 <div>
                   <h3>Track</h3>
+
                   <p>
                     Follow your complaint until the issue reaches resolution.
                   </p>
                 </div>
+
               </div>
 
             </div>
+
           </div>
 
+          {/* ================= DASHBOARD CARD ================= */}
           <div className="landing-how-card">
+
             <div className="landing-dashboard-top">
+
               <div>
                 <span>Campus overview</span>
                 <strong>Good morning 👋</strong>
               </div>
 
-              <div className="landing-dashboard-avatar">K</div>
+              <div className="landing-dashboard-avatar">
+                K
+              </div>
+
             </div>
 
             <div className="landing-dashboard-stat">
+
               <div>
                 <span>Active complaints</span>
                 <strong>24</strong>
@@ -340,42 +452,59 @@ function Landing() {
               <div className="landing-stat-progress">
                 <span />
               </div>
+
             </div>
 
             <div className="landing-dashboard-row">
+
               <div>
                 <span className="landing-status-dot green" />
                 Resolved
               </div>
+
               <strong>18</strong>
+
             </div>
 
             <div className="landing-dashboard-row">
+
               <div>
                 <span className="landing-status-dot orange" />
                 In progress
               </div>
+
               <strong>4</strong>
+
             </div>
 
             <div className="landing-dashboard-row">
+
               <div>
                 <span className="landing-status-dot gray" />
                 Pending
               </div>
+
               <strong>2</strong>
+
             </div>
 
             <div className="landing-ai-note">
               <Sparkles size={15} />
               <span>AI insights updated just now</span>
             </div>
+
           </div>
+
         </section>
 
         {/* ================= ABOUT ================= */}
-        <section className="landing-about" id="about">
+        <section
+          className="landing-about"
+          id="about"
+        >
+
           <div>
+
             <div className="landing-small-label">
               <span />
               Why CampusAI
@@ -386,6 +515,7 @@ function Landing() {
               <br />
               <span>experience campus.</span>
             </h2>
+
           </div>
 
           <p>
@@ -393,43 +523,70 @@ function Landing() {
             support together in one clean platform — designed specifically
             around the everyday needs of university life.
           </p>
+
         </section>
 
         {/* ================= CTA ================= */}
-        <section className="landing-cta" id="contact">
+        <section
+          className="landing-cta"
+          id="contact"
+        >
+
           <div className="landing-cta-inner">
+
             <div>
+
               <span>READY TO GET STARTED?</span>
+
               <h2>
                 Make campus support
                 <br />
                 feel effortless.
               </h2>
+
               <p>
                 Join CampusAI and experience a smarter way to connect with
                 your campus.
               </p>
+
             </div>
 
-            <Link to="/register" className="landing-cta-button">
+            <Link
+              to="/register"
+              className="landing-cta-button"
+            >
               Get Started
               <ArrowRight size={17} />
             </Link>
+
           </div>
+
         </section>
 
       </main>
 
       {/* ================= FOOTER ================= */}
       <footer className="landing-footer">
-        <Link to="/" className="landing-footer-brand">
-          <span className="landing-brand-mark">C</span>
+
+        <Link
+          to="/"
+          className="landing-footer-brand"
+        >
+          <span className="landing-brand-mark">
+            C
+          </span>
+
           Campus<span>AI</span>
         </Link>
 
-        <span>© 2026 CampusAI</span>
+        <span>
+          © 2026 CampusAI
+        </span>
 
-        <span>Smarter campus. Better experience.</span>
+        <span>
+          Smarter campus. Better experience.
+        </span>
+
       </footer>
 
     </div>
