@@ -1,102 +1,95 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  fill="none"
+>
+  <!-- Background -->
+  <rect
+    width="512"
+    height="512"
+    rx="110"
+    fill="#0A0A0A"
+  />
 
+  <!-- Subtle inner glow -->
+  <rect
+    x="18"
+    y="18"
+    width="476"
+    height="476"
+    rx="96"
+    stroke="#202020"
+    stroke-width="3"
+  />
+
+  <!-- Graduation Cap -->
+  <path
+    d="M104 176L256 105L408 176L256 247L104 176Z"
+    fill="#F5F5F5"
+  />
+
+  <!-- Cap lower edge -->
+  <path
+    d="M154 199V245C154 245 196 283 256 283C316 283 358 245 358 245V199L256 247L154 199Z"
+    fill="#D9D9D9"
+  />
+
+  <!-- Tassel -->
+  <path
+    d="M408 176V256"
+    stroke="#F5F5F5"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+
+  <rect
+    x="392"
+    y="250"
+    width="32"
+    height="58"
+    rx="14"
+    fill="#F5F5F5"
+  />
+
+  <!-- Stylized C -->
+  <path
+    d="M337 293
+       C315 269 286 256 254 256
+       C184 256 128 312 128 382
+       C128 452 184 508 254 508
+       C291 508 324 493 348 466"
+    stroke="url(#cGradient)"
+    stroke-width="46"
+    stroke-linecap="round"
+  />
+
+  <!-- AI Spark -->
+  <path
+    d="M256 323
+       L266 346
+       L289 356
+       L266 366
+       L256 389
+       L246 366
+       L223 356
+       L246 346
+       Z"
+    fill="#DDFBEF"
+  />
+
+  <!-- Gradient -->
   <defs>
-    <linearGradient id="cGradient" x1="90" y1="90" x2="430" y2="430" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A855F7"/>
-      <stop offset="0.5" stop-color="#6366F1"/>
-      <stop offset="1" stop-color="#3B82F6"/>
+    <linearGradient
+      id="cGradient"
+      x1="135"
+      y1="270"
+      x2="350"
+      y2="470"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.48" stop-color="#E7E7E7"/>
+      <stop offset="1" stop-color="#8E8E8E"/>
     </linearGradient>
-
-    <linearGradient id="buildingGradient" x1="190" y1="170" x2="330" y2="350" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E0E7FF"/>
-      <stop offset="1" stop-color="#A5B4FC"/>
-    </linearGradient>
-
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
-
-  <rect width="512" height="512" rx="112" fill="#020617"/>
-
-  <circle cx="256" cy="256" r="190" fill="#312E81" opacity="0.12"/>
-
-  <path
-    d="M390 143
-       C351 104 303 84 252 84
-       C156 84 78 161 78 256
-       C78 351 156 428 252 428
-       C303 428 351 408 390 369
-       L338 317
-       C315 340 285 352 252 352
-       C199 352 156 309 156 256
-       C156 203 199 160 252 160
-       C285 160 315 172 338 195
-       L390 143Z"
-    fill="url(#cGradient)"
-    filter="url(#glow)"
-  />
-
-  <path
-    d="M187 226L256 181L325 226H187Z"
-    fill="url(#buildingGradient)"
-  />
-
-  <path
-    d="M256 181V153"
-    stroke="#C7D2FE"
-    stroke-width="8"
-    stroke-linecap="round"
-  />
-
-  <path
-    d="M256 153C274 143 288 158 304 151V178C288 185 274 170 256 181V153Z"
-    fill="#C7D2FE"
-  />
-
-  <rect x="192" y="226" width="128" height="103" rx="5" fill="url(#buildingGradient)"/>
-
-  <rect x="205" y="235" width="20" height="86" rx="4" fill="#6366F1"/>
-  <rect x="246" y="235" width="20" height="86" rx="4" fill="#6366F1"/>
-  <rect x="287" y="235" width="20" height="86" rx="4" fill="#6366F1"/>
-
-  <path
-    d="M242 329V281
-       C242 266 252 256 262 256
-       C272 256 282 266 282 281V329H242Z"
-    fill="#020617"
-  />
-
-  <path
-    d="M326 225H363L379 209H407"
-    stroke="url(#cGradient)"
-    stroke-width="9"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-
-  <path
-    d="M326 258H371L387 242H420"
-    stroke="url(#cGradient)"
-    stroke-width="9"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-
-  <path
-    d="M326 291H359L375 307H403"
-    stroke="url(#cGradient)"
-    stroke-width="9"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-
-  <circle cx="414" cy="209" r="13" fill="#60A5FA"/>
-  <circle cx="427" cy="242" r="13" fill="#818CF8"/>
-  <circle cx="410" cy="307" r="13" fill="#60A5FA"/>
-
 </svg>
