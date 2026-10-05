@@ -3,15 +3,8 @@
   viewBox="0 0 512 512"
   fill="none"
 >
-  <!-- Background -->
-  <rect
-    width="512"
-    height="512"
-    rx="110"
-    fill="#0A0A0A"
-  />
+  <rect width="512" height="512" rx="110" fill="#0A0A0A"/>
 
-  <!-- Subtle inner glow -->
   <rect
     x="18"
     y="18"
@@ -22,19 +15,17 @@
     stroke-width="3"
   />
 
-  <!-- Graduation Cap -->
+  <!-- Graduation cap -->
   <path
     d="M104 176L256 105L408 176L256 247L104 176Z"
     fill="#F5F5F5"
   />
 
-  <!-- Cap lower edge -->
   <path
     d="M154 199V245C154 245 196 283 256 283C316 283 358 245 358 245V199L256 247L154 199Z"
     fill="#D9D9D9"
   />
 
-  <!-- Tassel -->
   <path
     d="M408 176V256"
     stroke="#F5F5F5"
@@ -51,7 +42,7 @@
     fill="#F5F5F5"
   />
 
-  <!-- Stylized C -->
+  <!-- C -->
   <path
     d="M337 293
        C315 269 286 256 254 256
@@ -63,21 +54,12 @@
     stroke-linecap="round"
   />
 
-  <!-- AI Spark -->
+  <!-- Spark -->
   <path
-    d="M256 323
-       L266 346
-       L289 356
-       L266 366
-       L256 389
-       L246 366
-       L223 356
-       L246 346
-       Z"
+    d="M256 323L266 346L289 356L266 366L256 389L246 366L223 356L246 346Z"
     fill="#DDFBEF"
   />
 
-  <!-- Gradient -->
   <defs>
     <linearGradient
       id="cGradient"
