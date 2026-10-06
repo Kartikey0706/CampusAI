@@ -122,15 +122,15 @@ function Landing() {
                 <ArrowRight size={17} />
               </Link>
 
-              <a
-                href="#how-it-works"
+              
+              <button
+                type="button"
                 className="landing-secondary-btn"
+                onClick={() => setShowCampusVideo(true)}
               >
-                <span className="landing-play-icon">
-                  ▶
-                </span>
-                Watch Demo
-              </a>
+                <span className="landing-play-icon">▶</span>
+                Explore SRMU
+              </button>
 
             </div>
 
@@ -590,6 +590,40 @@ function Landing() {
         </span>
 
       </footer>
+
+      {showCampusVideo && (
+  <div
+    className="campus-video-overlay"
+    onClick={() => setShowCampusVideo(false)}
+  >
+    <div
+      className="campus-video-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        type="button"
+        className="campus-video-close"
+        onClick={() => setShowCampusVideo(false)}
+        aria-label="Close campus video"
+      >
+        ×
+      </button>
+
+      <video
+        className="campus-video-player"
+        src="/srmu-drone.mp4"
+        controls
+        autoPlay
+        playsInline
+      />
+
+      <div className="campus-video-caption">
+        <strong>Explore Shri Ramswaroop Memorial University</strong>
+        <span>A glimpse of the campus behind CampusAI.</span>
+      </div>
+    </div>
+  </div>
+)}
 
     </div>
   );
