@@ -18,6 +18,8 @@ function Landing() {
     return localStorage.getItem("campusai-theme") === "dark";
   });
 
+  const [showCampusVideo, setShowCampusVideo] = useState(false);
+
   useEffect(() => {
     document.documentElement.classList.toggle("campusai-dark", darkMode);
 
