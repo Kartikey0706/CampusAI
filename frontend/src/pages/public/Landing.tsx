@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BrainCircuit,
-  Building2,
-  CalendarDays,
   CheckCircle2,
   ClipboardCheck,
-  MessageCircle,
+  Clock3,
+  GraduationCap,
+  Menu,
+  MessageSquareText,
   Moon,
-  Sparkles,
+  ShieldCheck,
   Sun,
   Users,
-  Zap,
+  X,
 } from "lucide-react";
 
 function Landing() {
