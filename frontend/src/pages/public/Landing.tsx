@@ -5,7 +5,6 @@ import {
   BrainCircuit,
   Building2,
   CalendarDays,
-  ClipboardCheck,
   MessageCircle,
   Moon,
   Sparkles,
