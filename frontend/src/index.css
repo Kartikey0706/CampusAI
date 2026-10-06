@@ -1387,3 +1387,170 @@ html.campusai-dark .landing-footer {
 html.campusai-dark .landing-footer-brand {
   color: #dce7e0;
 }
+
+/* =========================================================
+   SRMU CAMPUS VIDEO MODAL
+   ========================================================= */
+
+.campus-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(8, 14, 11, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  animation: campusVideoFadeIn 0.2s ease;
+}
+
+.campus-video-modal {
+  position: relative;
+
+  width: min(920px, 100%);
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+
+  background: #ffffff;
+
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+
+  animation: campusVideoScaleIn 0.25s ease;
+}
+
+.campus-video-player {
+  display: block;
+
+  width: 100%;
+  max-height: 72vh;
+
+  background: #000;
+
+  object-fit: contain;
+}
+
+.campus-video-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(15, 25, 20, 0.78);
+  color: #ffffff;
+
+  font-size: 27px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(8px);
+}
+
+.campus-video-close:hover {
+  background: #122019;
+}
+
+.campus-video-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 16px 20px 18px;
+}
+
+.campus-video-caption strong {
+  color: #142019;
+  font-size: 15px;
+}
+
+.campus-video-caption span {
+  color: #718078;
+  font-size: 13px;
+}
+
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes campusVideoFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes campusVideoScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+  .campus-video-overlay {
+    padding: 14px;
+  }
+
+  .campus-video-modal {
+    border-radius: 18px;
+  }
+
+  .campus-video-caption {
+    padding: 13px 15px 15px;
+  }
+
+  .campus-video-close {
+    top: 9px;
+    right: 9px;
+
+    width: 34px;
+    height: 34px;
+  }
+}
+
+
+/* =========================================================
+   SRMU CAMPUS VIDEO — DARK MODE
+   ========================================================= */
+
+html.campusai-dark .campus-video-modal {
+  background: #151f19;
+  border-color: #304036;
+}
+
+html.campusai-dark .campus-video-caption strong {
+  color: #e6eee9;
+}
+
+html.campusai-dark .campus-video-caption span {
+  color: #8f9d95;
+}
