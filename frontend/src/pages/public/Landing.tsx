@@ -11,12 +11,16 @@ import {
   Moon,
   Sparkles,
   Sun,
+  Users,
+  Zap,
 } from "lucide-react";
 
 function Landing() {
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("campusai-theme") === "dark";
   });
+
+  const [showCampusVideo, setShowCampusVideo] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle("campusai-dark", darkMode);
@@ -34,12 +38,14 @@ function Landing() {
   return (
     <div className="landing-page">
 
-      {/* ================= NAVBAR ================= */}
+      {/* =========================================================
+          NAVBAR
+      ========================================================= */}
       <header className="landing-nav">
         <Link to="/" className="landing-brand">
           <span className="landing-brand-mark">C</span>
 
-          <span>
+          <span className="landing-brand-text">
             Campus<span>AI</span>
           </span>
         </Link>
@@ -52,8 +58,6 @@ function Landing() {
         </nav>
 
         <div className="landing-nav-actions">
-
-          {/* ================= THEME BUTTON ================= */}
           <button
             type="button"
             className="landing-theme-btn"
@@ -70,9 +74,9 @@ function Landing() {
             onClick={toggleTheme}
           >
             {darkMode ? (
-              <Sun size={17} />
+              <Sun size={18} />
             ) : (
-              <Moon size={17} />
+              <Moon size={18} />
             )}
           </button>
 
@@ -86,26 +90,38 @@ function Landing() {
         </div>
       </header>
 
-      {/* ================= HERO ================= */}
+
       <main>
 
+        {/* =========================================================
+            HERO
+        ========================================================= */}
         <section className="landing-hero" id="home">
 
-          {/* ================= SRMU DRONE VIDEO ================= */}
+          {/* Background Video */}
           <video
-            className="landing-hero-video"
+            className="landing-hero-bg-video"
             src="/srmu-drone.mp4"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            aria-hidden="true"
           />
 
-          {/* ================= VIDEO OVERLAY ================= */}
-          <div className="landing-hero-overlay" />
+          {/* Video Overlay */}
+          <div
+            className="landing-hero-video-overlay"
+            aria-hidden="true"
+          />
 
-          {/* ================= HERO CONTENT ================= */}
+          {/* Extra gradient for text readability */}
+          <div
+            className="landing-hero-gradient"
+            aria-hidden="true"
+          />
+
+          {/* Hero Content */}
           <div className="landing-hero-content">
 
             <div className="landing-badge">
@@ -120,9 +136,9 @@ function Landing() {
             </h1>
 
             <p>
-              CampusAI makes campus life simpler by helping students report
-              problems, get assistance, and stay connected with everything
-              happening around their university.
+              CampusAI makes campus life simpler by helping students
+              report problems, get assistance, and stay connected
+              with everything happening around their university.
             </p>
 
             <div className="landing-hero-buttons">
@@ -135,13 +151,17 @@ function Landing() {
                 <ArrowRight size={17} />
               </Link>
 
-              <a
-                href="#home"
+              <button
+                type="button"
                 className="landing-secondary-btn"
+                onClick={() => setShowCampusVideo(true)}
               >
-                <span className="landing-play-icon">▶</span>
+                <span className="landing-play-icon">
+                  ▶
+                </span>
+
                 Explore SRMU
-              </a>
+              </button>
 
             </div>
 
@@ -154,7 +174,7 @@ function Landing() {
                 <span>+</span>
               </div>
 
-              <div>
+              <div className="landing-trust-text">
                 <strong>+1.2k</strong>
                 <span>Trusted by SRMU Students</span>
               </div>
@@ -163,18 +183,106 @@ function Landing() {
 
           </div>
 
-          {/* ================= HERO VISUAL ================= */}
+
+          {/* =====================================================
+              HERO FLOATING UI
+          ===================================================== */}
           <div className="landing-hero-visual">
 
-            {/* Campus image kept as a subtle visual fallback/accent */}
-            <div className="landing-campus-shape">
-              <img
-                src="/campus-hero.png"
-                alt="Shri Ramswaroop Memorial University campus"
-              />
+            <div className="landing-floating-panel">
+
+              <div className="landing-panel-top">
+
+                <div className="landing-panel-brand">
+                  <span className="landing-panel-logo">
+                    C
+                  </span>
+
+                  <div>
+                    <strong>CampusAI</strong>
+                    <span>Student Dashboard</span>
+                  </div>
+                </div>
+
+                <span className="landing-panel-live">
+                  <span />
+                  Live
+                </span>
+
+              </div>
+
+
+              <div className="landing-panel-heading">
+                <span>Good morning 👋</span>
+                <strong>How can we help?</strong>
+              </div>
+
+
+              <div className="landing-panel-grid">
+
+                <div className="landing-panel-card">
+                  <div className="landing-panel-card-icon">
+                    <ClipboardCheck size={18} />
+                  </div>
+
+                  <strong>Complaints</strong>
+                  <span>Report an issue</span>
+                </div>
+
+
+                <div className="landing-panel-card">
+                  <div className="landing-panel-card-icon">
+                    <MessageCircle size={18} />
+                  </div>
+
+                  <strong>AI Assistant</strong>
+                  <span>Get instant help</span>
+                </div>
+
+
+                <div className="landing-panel-card">
+                  <div className="landing-panel-card-icon">
+                    <Building2 size={18} />
+                  </div>
+
+                  <strong>Notices</strong>
+                  <span>Campus updates</span>
+                </div>
+
+
+                <div className="landing-panel-card">
+                  <div className="landing-panel-card-icon">
+                    <CalendarDays size={18} />
+                  </div>
+
+                  <strong>Timetable</strong>
+                  <span>View schedule</span>
+                </div>
+
+              </div>
+
+
+              <div className="landing-panel-status">
+
+                <div className="landing-status-icon">
+                  <CheckCircle2 size={18} />
+                </div>
+
+                <div>
+                  <strong>Complaint Submitted</strong>
+                  <span>AI analysis completed</span>
+                </div>
+
+                <span className="landing-status-time">
+                  Just now
+                </span>
+
+              </div>
+
             </div>
 
-            {/* ================= AI ASSISTANT ================= */}
+
+            {/* AI floating card */}
             <div className="landing-float-card landing-ai-card">
 
               <div className="landing-float-icon">
@@ -190,55 +298,14 @@ function Landing() {
 
             </div>
 
-            {/* ================= COMPLAINT SUBMITTED ================= */}
-            <div className="landing-float-card landing-success-card">
 
-              <div className="landing-success-icon">
-                <CheckCircle2 size={18} />
-              </div>
-
-              <div>
-                <strong>Complaint Submitted</strong>
-                <span>AI analysis completed</span>
-              </div>
-
-            </div>
-
-            {/* ================= MINI MENU ================= */}
-            <div className="landing-mini-menu">
-
-              <div className="landing-mini-menu-title">
-                <span>CampusAI</span>
-                <span className="landing-menu-dot" />
-              </div>
-
-              <div className="landing-menu-item active">
-                <ClipboardCheck size={14} />
-                <span>Complaints</span>
-              </div>
-
-              <div className="landing-menu-item">
-                <MessageCircle size={14} />
-                <span>AI Assistant</span>
-              </div>
-
-              <div className="landing-menu-item">
-                <Building2 size={14} />
-                <span>Notices</span>
-              </div>
-
-              <div className="landing-menu-item">
-                <CalendarDays size={14} />
-                <span>Timetable</span>
-              </div>
-
-            </div>
-
+            {/* handwritten text */}
             <div className="landing-handwritten">
               Your Campus AI
               <br />
               Companion
             </div>
+
 
             <div className="landing-sparkle landing-sparkle-one">
               ✦
@@ -252,316 +319,306 @@ function Landing() {
 
         </section>
 
-        {/* ================= FEATURES ================= */}
+
+        {/* =========================================================
+            FEATURES
+        ========================================================= */}
         <section
-          className="landing-features"
+          className="landing-section landing-features"
           id="features"
         >
 
           <div className="landing-section-heading">
 
-            <div className="landing-small-label">
-              <span />
-              Everything you need
-            </div>
+            <span className="landing-section-label">
+              WHY CAMPUSAI
+            </span>
 
             <h2>
-              Everything You Need,
+              Everything your campus
               <br />
-              <span>All in One Place.</span>
+              <span>needs in one place.</span>
             </h2>
 
             <p>
-              One simple platform for a smarter, more connected campus
-              experience.
+              A smarter way for students to connect with their
+              university and solve everyday campus problems.
             </p>
 
           </div>
+
 
           <div className="landing-feature-grid">
 
-            {/* Feature 1 */}
-            <div className="landing-feature-card">
+            <article className="landing-feature-card">
 
               <div className="landing-feature-icon">
-                <BrainCircuit size={21} />
+                <BrainCircuit size={23} />
               </div>
 
-              <h3>AI Complaint Analysis</h3>
+              <h3>AI-Powered Assistance</h3>
 
               <p>
-                CampusAI understands your complaint and automatically helps
-                identify its category, urgency, sentiment and department.
+                Get intelligent assistance for campus queries,
+                complaints, and everyday student needs.
               </p>
 
-              <span className="landing-feature-link">
-                AI-powered
-                <ArrowRight size={14} />
-              </span>
+            </article>
 
-            </div>
 
-            {/* Feature 2 */}
-            <div className="landing-feature-card">
+            <article className="landing-feature-card">
 
               <div className="landing-feature-icon">
-                <MessageCircle size={21} />
+                <ClipboardCheck size={23} />
               </div>
 
-              <h3>AI Assistant</h3>
+              <h3>Smart Complaints</h3>
 
               <p>
-                Get quick guidance while reporting problems and make the
-                complaint process easier and more intuitive.
+                Submit campus issues easily and let AI classify,
+                prioritize, and route them to the right department.
               </p>
 
-              <span className="landing-feature-link">
-                Always available
-                <ArrowRight size={14} />
-              </span>
+            </article>
 
-            </div>
 
-            {/* Feature 3 */}
-            <div className="landing-feature-card">
+            <article className="landing-feature-card">
 
               <div className="landing-feature-icon">
-                <Building2 size={21} />
+                <MessageCircle size={23} />
               </div>
 
-              <h3>Notices & Updates</h3>
+              <h3>Student Support</h3>
 
               <p>
-                Stay informed about important campus announcements and
-                updates from one organized place.
+                One simple platform to get help, information,
+                and important campus updates.
               </p>
 
-              <span className="landing-feature-link">
-                Stay updated
-                <ArrowRight size={14} />
-              </span>
+            </article>
 
-            </div>
 
-            {/* Feature 4 */}
-            <div className="landing-feature-card">
+            <article className="landing-feature-card">
 
               <div className="landing-feature-icon">
-                <CalendarDays size={21} />
+                <Zap size={23} />
               </div>
 
-              <h3>Timetable & Academics</h3>
+              <h3>Faster Resolution</h3>
 
               <p>
-                Keep your academic information accessible so you can spend
-                less time searching and more time learning.
+                Reduce repetitive complaints and help campus
+                departments respond to important issues faster.
               </p>
 
-              <span className="landing-feature-link">
-                Stay organized
-                <ArrowRight size={14} />
-              </span>
-
-            </div>
+            </article>
 
           </div>
 
         </section>
 
-        {/* ================= HOW IT WORKS ================= */}
-        <section
-          className="landing-how"
-          id="how-it-works"
-        >
 
-          <div className="landing-how-content">
+        {/* =========================================================
+            HOW IT WORKS
+        ========================================================= */}
+        <section className="landing-section landing-how">
 
-            <div className="landing-small-label landing-light-label">
-              <span />
-              Simple by design
-            </div>
+          <div className="landing-section-heading">
+
+            <span className="landing-section-label">
+              HOW IT WORKS
+            </span>
 
             <h2>
-              From problem
+              Campus problems,
               <br />
-              <span>to solution.</span>
+              <span>made simple.</span>
             </h2>
-
-            <p>
-              CampusAI removes the unnecessary complexity from campus support.
-              Just tell us what happened and let AI help with the rest.
-            </p>
-
-            <div className="landing-steps">
-
-              <div className="landing-step">
-                <span>01</span>
-
-                <div>
-                  <h3>Report</h3>
-
-                  <p>
-                    Tell us what happened in a simple complaint form.
-                  </p>
-                </div>
-              </div>
-
-              <div className="landing-step">
-                <span>02</span>
-
-                <div>
-                  <h3>AI Understands</h3>
-
-                  <p>
-                    AI analyses category, urgency, sentiment and routing.
-                  </p>
-                </div>
-              </div>
-
-              <div className="landing-step">
-                <span>03</span>
-
-                <div>
-                  <h3>Track</h3>
-
-                  <p>
-                    Follow your complaint until the issue reaches resolution.
-                  </p>
-                </div>
-              </div>
-
-            </div>
 
           </div>
 
-          {/* ================= DASHBOARD CARD ================= */}
-          <div className="landing-how-card">
 
-            <div className="landing-dashboard-top">
+          <div className="landing-steps">
 
-              <div>
-                <span>Campus overview</span>
-                <strong>Good morning 👋</strong>
+            <div className="landing-step">
+
+              <div className="landing-step-number">
+                01
               </div>
 
-              <div className="landing-dashboard-avatar">
-                K
+              <div>
+                <h3>Tell us what happened</h3>
+
+                <p>
+                  Submit your campus issue or ask a question
+                  through CampusAI.
+                </p>
               </div>
 
             </div>
 
-            <div className="landing-dashboard-stat">
 
-              <div>
-                <span>Active complaints</span>
-                <strong>24</strong>
+            <div className="landing-step">
+
+              <div className="landing-step-number">
+                02
               </div>
 
-              <div className="landing-stat-progress">
-                <span />
+              <div>
+                <h3>AI understands it</h3>
+
+                <p>
+                  CampusAI analyzes the request and identifies
+                  the right category and priority.
+                </p>
               </div>
 
             </div>
 
-            <div className="landing-dashboard-row">
 
-              <div>
-                <span className="landing-status-dot green" />
-                Resolved
+            <div className="landing-step">
+
+              <div className="landing-step-number">
+                03
               </div>
 
-              <strong>18</strong>
+              <div>
+                <h3>Right department gets it</h3>
+
+                <p>
+                  The issue is routed to the appropriate campus
+                  department for action.
+                </p>
+              </div>
 
             </div>
 
-            <div className="landing-dashboard-row">
 
-              <div>
-                <span className="landing-status-dot orange" />
-                In progress
+            <div className="landing-step">
+
+              <div className="landing-step-number">
+                04
               </div>
 
-              <strong>4</strong>
-
-            </div>
-
-            <div className="landing-dashboard-row">
-
               <div>
-                <span className="landing-status-dot gray" />
-                Pending
+                <h3>Track the progress</h3>
+
+                <p>
+                  Stay updated and know what is happening with
+                  your complaint.
+                </p>
               </div>
 
-              <strong>2</strong>
-
-            </div>
-
-            <div className="landing-ai-note">
-              <Sparkles size={15} />
-              <span>AI insights updated just now</span>
             </div>
 
           </div>
 
         </section>
 
-        {/* ================= ABOUT ================= */}
+
+        {/* =========================================================
+            ABOUT
+        ========================================================= */}
         <section
-          className="landing-about"
+          className="landing-section landing-about"
           id="about"
         >
 
-          <div>
+          <div className="landing-about-content">
 
-            <div className="landing-small-label">
-              <span />
-              Why CampusAI
-            </div>
+            <span className="landing-section-label">
+              ABOUT CAMPUSAI
+            </span>
 
             <h2>
-              A better way to
+              Built around the
               <br />
-              <span>experience campus.</span>
+              <span>student experience.</span>
             </h2>
+
+            <p>
+              CampusAI is designed specifically for modern
+              university campuses. Instead of students searching
+              through different departments and channels, everything
+              starts from one simple platform.
+            </p>
+
+            <p>
+              From reporting Wi-Fi, electricity, classroom,
+              hostel, transport, or other campus issues to getting
+              useful assistance, CampusAI brings it together.
+            </p>
+
+            <Link
+              to="/register"
+              className="landing-outline-btn"
+            >
+              Join CampusAI
+              <ArrowRight size={17} />
+            </Link>
 
           </div>
 
-          <p>
-            CampusAI brings students, campus information and intelligent
-            support together in one clean platform — designed specifically
-            around the everyday needs of university life.
-          </p>
+
+          <div className="landing-about-stats">
+
+            <div className="landing-stat-card">
+              <Users size={22} />
+              <strong>1.2k+</strong>
+              <span>Student users</span>
+            </div>
+
+            <div className="landing-stat-card">
+              <Building2 size={22} />
+              <strong>13+</strong>
+              <span>Issue categories</span>
+            </div>
+
+            <div className="landing-stat-card">
+              <BrainCircuit size={22} />
+              <strong>AI</strong>
+              <span>Smart classification</span>
+            </div>
+
+            <div className="landing-stat-card">
+              <CheckCircle2 size={22} />
+              <strong>24/7</strong>
+              <span>Accessible platform</span>
+            </div>
+
+          </div>
 
         </section>
 
-        {/* ================= CTA ================= */}
+
+        {/* =========================================================
+            CTA
+        ========================================================= */}
         <section
           className="landing-cta"
           id="contact"
         >
 
-          <div className="landing-cta-inner">
+          <div className="landing-cta-content">
 
-            <div>
+            <span className="landing-section-label">
+              READY TO GET STARTED?
+            </span>
 
-              <span>READY TO GET STARTED?</span>
+            <h2>
+              Your campus.
+              <br />
+              <span>One smarter platform.</span>
+            </h2>
 
-              <h2>
-                Make campus support
-                <br />
-                feel effortless.
-              </h2>
-
-              <p>
-                Join CampusAI and experience a smarter way to connect with
-                your campus.
-              </p>
-
-            </div>
+            <p>
+              Join CampusAI and experience a simpler way to
+              connect with your university.
+            </p>
 
             <Link
               to="/register"
-              className="landing-cta-button"
+              className="landing-primary-btn landing-cta-btn"
             >
               Get Started
               <ArrowRight size={17} />
@@ -573,29 +630,97 @@ function Landing() {
 
       </main>
 
-      {/* ================= FOOTER ================= */}
+
+      {/* =========================================================
+          FOOTER
+      ========================================================= */}
       <footer className="landing-footer">
 
-        <Link
-          to="/"
-          className="landing-footer-brand"
-        >
-          <span className="landing-brand-mark">
-            C
-          </span>
+        <div className="landing-footer-brand">
 
-          Campus<span>AI</span>
-        </Link>
+          <Link to="/" className="landing-brand">
+            <span className="landing-brand-mark">
+              C
+            </span>
 
-        <span>
-          © 2026 CampusAI
-        </span>
+            <span className="landing-brand-text">
+              Campus<span>AI</span>
+            </span>
+          </Link>
 
-        <span>
-          Smarter campus. Better experience.
-        </span>
+          <p>
+            Smarter campus. Better experience.
+          </p>
+
+        </div>
+
+
+        <div className="landing-footer-links">
+
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+          <Link to="/login">Login</Link>
+
+        </div>
+
+
+        <div className="landing-footer-copy">
+          © {new Date().getFullYear()} CampusAI. Built for SRMU.
+        </div>
 
       </footer>
+
+
+      {/* =========================================================
+          CAMPUS VIDEO MODAL
+      ========================================================= */}
+      {showCampusVideo && (
+
+        <div
+          className="campus-video-overlay"
+          onClick={() => setShowCampusVideo(false)}
+        >
+
+          <div
+            className="campus-video-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            <button
+              type="button"
+              className="campus-video-close"
+              onClick={() => setShowCampusVideo(false)}
+              aria-label="Close campus video"
+            >
+              ×
+            </button>
+
+            <video
+              className="campus-video-player"
+              src="/srmu-drone.mp4"
+              controls
+              autoPlay
+              playsInline
+            />
+
+            <div className="campus-video-caption">
+
+              <strong>
+                Explore Shri Ramswaroop Memorial University
+              </strong>
+
+              <span>
+                A glimpse of the campus behind CampusAI.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
   );
