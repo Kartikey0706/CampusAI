@@ -4,10 +4,12 @@ import {
   ArrowRight,
   BrainCircuit,
   Building2,
+  CalendarDays,
   CheckCircle2,
   ClipboardCheck,
   MessageCircle,
   Moon,
+  Sparkles,
   Sun,
   Users,
   Zap,
@@ -96,7 +98,7 @@ function Landing() {
         ========================================================= */}
         <section className="landing-hero" id="home">
 
-          {/* SRMU background video */}
+          {/* Background Video */}
           <video
             className="landing-hero-bg-video"
             src="/srmu-drone.mp4"
@@ -107,12 +109,19 @@ function Landing() {
             aria-hidden="true"
           />
 
-          {/* Dark overlay for text readability */}
+          {/* Video Overlay */}
           <div
             className="landing-hero-video-overlay"
             aria-hidden="true"
           />
 
+          {/* Extra gradient for text readability */}
+          <div
+            className="landing-hero-gradient"
+            aria-hidden="true"
+          />
+
+          {/* Hero Content */}
           <div className="landing-hero-content">
 
             <div className="landing-badge">
@@ -173,6 +182,7 @@ function Landing() {
             </div>
 
           </div>
+
 
         </section>
 
