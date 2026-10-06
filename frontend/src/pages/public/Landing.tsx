@@ -18,8 +18,6 @@ function Landing() {
     return localStorage.getItem("campusai-theme") === "dark";
   });
 
-  const [showCampusVideo, setShowCampusVideo] = useState(false);
-
   useEffect(() => {
     document.documentElement.classList.toggle("campusai-dark", darkMode);
 
@@ -93,6 +91,21 @@ function Landing() {
 
         <section className="landing-hero" id="home">
 
+          {/* ================= SRMU DRONE VIDEO ================= */}
+          <video
+            className="landing-hero-video"
+            src="/srmu-drone.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
+
+          {/* ================= VIDEO OVERLAY ================= */}
+          <div className="landing-hero-overlay" />
+
+          {/* ================= HERO CONTENT ================= */}
           <div className="landing-hero-content">
 
             <div className="landing-badge">
@@ -122,15 +135,13 @@ function Landing() {
                 <ArrowRight size={17} />
               </Link>
 
-              
-              <button
-                type="button"
+              <a
+                href="#home"
                 className="landing-secondary-btn"
-                onClick={() => setShowCampusVideo(true)}
               >
                 <span className="landing-play-icon">▶</span>
                 Explore SRMU
-              </button>
+              </a>
 
             </div>
 
@@ -155,6 +166,7 @@ function Landing() {
           {/* ================= HERO VISUAL ================= */}
           <div className="landing-hero-visual">
 
+            {/* Campus image kept as a subtle visual fallback/accent */}
             <div className="landing-campus-shape">
               <img
                 src="/campus-hero.png"
@@ -383,7 +395,6 @@ function Landing() {
             <div className="landing-steps">
 
               <div className="landing-step">
-
                 <span>01</span>
 
                 <div>
@@ -393,11 +404,9 @@ function Landing() {
                     Tell us what happened in a simple complaint form.
                   </p>
                 </div>
-
               </div>
 
               <div className="landing-step">
-
                 <span>02</span>
 
                 <div>
@@ -407,11 +416,9 @@ function Landing() {
                     AI analyses category, urgency, sentiment and routing.
                   </p>
                 </div>
-
               </div>
 
               <div className="landing-step">
-
                 <span>03</span>
 
                 <div>
@@ -421,7 +428,6 @@ function Landing() {
                     Follow your complaint until the issue reaches resolution.
                   </p>
                 </div>
-
               </div>
 
             </div>
@@ -590,40 +596,6 @@ function Landing() {
         </span>
 
       </footer>
-
-      {showCampusVideo && (
-  <div
-    className="campus-video-overlay"
-    onClick={() => setShowCampusVideo(false)}
-  >
-    <div
-      className="campus-video-modal"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        type="button"
-        className="campus-video-close"
-        onClick={() => setShowCampusVideo(false)}
-        aria-label="Close campus video"
-      >
-        ×
-      </button>
-
-      <video
-        className="campus-video-player"
-        src="/srmu-drone.mp4"
-        controls
-        autoPlay
-        playsInline
-      />
-
-      <div className="campus-video-caption">
-        <strong>Explore Shri Ramswaroop Memorial University</strong>
-        <span>A glimpse of the campus behind CampusAI.</span>
-      </div>
-    </div>
-  </div>
-)}
 
     </div>
   );
