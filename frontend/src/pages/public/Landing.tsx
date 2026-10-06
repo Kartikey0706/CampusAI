@@ -96,13 +96,18 @@ function Landing() {
         ========================================================= */}
         <section className="landing-hero" id="home">
 
-          {/* Clean campus background */}
-          <div
-            className="landing-hero-bg-image"
+          {/* Background Video */}
+          <video
+            className="landing-hero-bg-video"
+            src="/srmu-drone.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
             aria-hidden="true"
           />
 
-          {/* Background overlay */}
+          {/* Video Overlay */}
           <div
             className="landing-hero-video-overlay"
             aria-hidden="true"
