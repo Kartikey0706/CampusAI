@@ -1663,184 +1663,9 @@ video {
 
 
 /* ================================================================
-   AUTH + PUBLIC APP STYLES
-   Keep these global styles because Login/Register/App use these
-   classes outside the landing page.
-================================================================ */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 6vw;
-  background: rgba(255, 255, 255, 0.94);
-  border-bottom: 1px solid #e7eee9;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #17211c;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-.brand-mark {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 11px;
-  background: #15221c;
-  color: #fff;
-  font-family: Georgia, serif;
-  font-weight: 700;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.btn {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 18px;
-  border: 1px solid #15221c;
-  border-radius: 10px;
-  background: #15221c;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  transition: 0.2s ease;
-}
-
-.btn:hover {
-  background: #26382e;
-  border-color: #26382e;
-  transform: translateY(-1px);
-}
-
-.btn.small {
-  min-height: 40px;
-  padding: 0 15px;
-  font-size: 13px;
-}
-
-.btn.full {
-  width: 100%;
-}
-
-.auth {
-  min-height: calc(100vh - 72px);
-  display: grid;
-  place-items: center;
-  padding: 50px 20px 70px;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(185, 240, 202, 0.18), transparent 32%),
-    #f7faf8;
-}
-
-.auth-box {
-  width: min(100%, 480px);
-  padding: 38px;
-  border: 1px solid #e1ebe5;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 20px 60px rgba(30, 55, 43, 0.09);
-}
-
-.auth-box h1 {
-  color: #17211c;
-  font-size: clamp(30px, 5vw, 40px);
-  line-height: 1.1;
-  letter-spacing: -1.5px;
-  font-weight: 800;
-}
-
-.auth-box > p {
-  color: #64736b;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.login-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  color: #34443b;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.login-form input {
-  width: 100%;
-  min-height: 46px;
-  padding: 0 13px;
-  border: 1px solid #d8e3dc;
-  border-radius: 10px;
-  outline: none;
-  background: #fff;
-  color: #17211c;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.login-form input::placeholder {
-  color: #9aa79f;
-}
-
-.login-form input:focus {
-  border-color: #7ca88f;
-  box-shadow: 0 0 0 3px rgba(124, 168, 143, 0.14);
-}
-
-.error {
-  padding: 11px 13px;
-  border: 1px solid #fecaca;
-  border-radius: 10px;
-  background: #fef2f2;
-  color: #b91c1c;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.switch {
-  margin-top: 20px;
-  color: #66756d;
-  font-size: 14px;
-  text-align: center;
-}
-
-.switch a {
-  color: #356b50;
-  font-weight: 700;
-}
-
-.switch a:hover {
-  text-decoration: underline;
-}
-
-/* ================================================================
-   FINAL CLEAN HERO OVERRIDES
-   These come after the original landing CSS so the current hero
-   is clean while all other existing app styles remain intact.
+   CAMPUSAI HERO — CLEAN VIDEO VERSION
+   Only the landing hero is overridden here. All existing app,
+   authentication, student and admin styles above remain untouched.
 ================================================================ */
 
 .landing-hero {
@@ -1881,16 +1706,16 @@ video {
   );
 }
 
-.landing-hero::after {
-  content: "";
+.landing-hero-gradient {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 80px;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(to bottom, transparent, rgba(7, 20, 13, 0.72));
+  background: linear-gradient(
+    to bottom,
+    transparent 72%,
+    rgba(7, 20, 13, 0.6) 100%
+  );
 }
 
 .landing-hero-content {
@@ -1900,35 +1725,8 @@ video {
   color: #fff;
 }
 
-.landing-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 13px;
-  border: 1px solid rgba(208, 255, 226, 0.25);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  color: #d8f8e5;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.landing-badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #a7e8bd;
-  box-shadow: 0 0 0 4px rgba(167, 232, 189, 0.12);
-}
-
 .landing-hero h1 {
-  margin: 22px 0 18px;
-  max-width: 760px;
   color: #fff;
-  font-size: clamp(48px, 6vw, 76px);
-  line-height: 0.98;
-  letter-spacing: -0.055em;
 }
 
 .landing-hero h1 span {
@@ -1936,179 +1734,66 @@ video {
 }
 
 .landing-hero-content > p {
-  max-width: 640px;
-  margin: 0;
   color: rgba(255, 255, 255, 0.76);
-  font-size: 17px;
-  line-height: 1.7;
 }
 
-.landing-hero-buttons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 30px;
+.landing-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(208, 255, 226, 0.25);
+  color: #d8f8e5;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.landing-primary-btn,
-.landing-secondary-btn {
-  min-height: 48px;
-  padding: 0 19px;
-  border-radius: 11px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+.landing-badge-dot {
+  background: #a7e8bd;
+  box-shadow: 0 0 0 4px rgba(167, 232, 189, 0.12);
 }
 
 .landing-primary-btn {
   color: #102019;
   background: #d8f8e5;
-  border: 1px solid #d8f8e5;
+  border-color: #d8f8e5;
 }
 
 .landing-secondary-btn {
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.24);
   backdrop-filter: blur(12px);
-}
-
-.landing-primary-btn:hover,
-.landing-secondary-btn:hover {
-  transform: translateY(-2px);
-}
-
-.landing-play-icon {
-  font-size: 10px;
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .landing-trust {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 32px;
   color: rgba(255, 255, 255, 0.68);
-  font-size: 12px;
 }
 
 .landing-trust strong {
-  display: block;
-  margin-bottom: 2px;
   color: #fff;
-  font-size: 13px;
-}
-
-.landing-trust-text span {
-  display: block;
-}
-
-.landing-avatars {
-  display: flex;
-  align-items: center;
 }
 
 .landing-avatars span {
-  width: 31px;
-  height: 31px;
-  margin-left: -7px;
-  display: grid;
-  place-items: center;
-  border: 2px solid rgba(7, 20, 13, 0.9);
-  border-radius: 50%;
+  border-color: rgba(7, 20, 13, 0.9);
   background: #d8f8e5;
   color: #102019;
-  font-size: 9px;
-  font-weight: 800;
 }
 
-.landing-avatars span:first-child {
-  margin-left: 0;
-}
-
-/* Final responsive override for the clean hero */
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   .landing-hero {
-    min-height: 760px;
-    padding: 95px 7vw 90px;
+    min-height: 680px;
+    padding: 90px 6vw 80px;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 650px) {
   .landing-hero {
-    min-height: 700px;
-    display: flex;
-    padding: 85px 22px 65px;
+    min-height: 650px;
+    padding: 75px 20px 65px;
   }
 
   .landing-hero-bg-video {
     inset: -10%;
     width: 120%;
     height: 120%;
-    object-position: center center;
-  }
-
-  .landing-hero-video-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(6, 17, 11, 0.72) 0%,
-      rgba(6, 17, 11, 0.84) 48%,
-      rgba(6, 17, 11, 0.94) 100%
-    );
-  }
-
-  .landing-hero h1 {
-    margin-top: 22px;
-    font-size: clamp(46px, 13vw, 64px);
-    line-height: 0.99;
-    letter-spacing: -3px;
-  }
-
-  .landing-hero-content > p {
-    font-size: 15px;
-    line-height: 1.65;
-  }
-
-  .landing-hero-buttons {
-    flex-direction: column;
-    align-items: stretch;
-    margin-top: 28px;
-  }
-
-  .landing-primary-btn,
-  .landing-secondary-btn {
-    width: 100%;
-  }
-
-  .landing-trust {
-    margin-top: 28px;
-  }
-}
-
-@media (max-width: 520px) {
-  .auth {
-    padding: 30px 15px 50px;
-  }
-
-  .auth-box {
-    padding: 27px 20px;
-    border-radius: 18px;
-  }
-
-  .nav {
-    padding: 12px 18px;
-  }
-
-  .nav .brand {
-    font-size: 19px;
-  }
-
-  .nav .brand-mark {
-    width: 34px;
-    height: 34px;
   }
 }
