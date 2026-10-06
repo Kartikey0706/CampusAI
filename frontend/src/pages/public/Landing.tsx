@@ -4,12 +4,10 @@ import {
   ArrowRight,
   BrainCircuit,
   Building2,
-  CalendarDays,
   CheckCircle2,
   ClipboardCheck,
   MessageCircle,
   Moon,
-  Sparkles,
   Sun,
   Users,
   Zap,
@@ -98,7 +96,7 @@ function Landing() {
         ========================================================= */}
         <section className="landing-hero" id="home">
 
-          {/* Background Video */}
+          {/* SRMU background video */}
           <video
             className="landing-hero-bg-video"
             src="/srmu-drone.mp4"
@@ -109,19 +107,12 @@ function Landing() {
             aria-hidden="true"
           />
 
-          {/* Video Overlay */}
+          {/* Dark overlay for text readability */}
           <div
             className="landing-hero-video-overlay"
             aria-hidden="true"
           />
 
-          {/* Extra gradient for text readability */}
-          <div
-            className="landing-hero-gradient"
-            aria-hidden="true"
-          />
-
-          {/* Hero Content */}
           <div className="landing-hero-content">
 
             <div className="landing-badge">
@@ -179,140 +170,6 @@ function Landing() {
                 <span>Trusted by SRMU Students</span>
               </div>
 
-            </div>
-
-          </div>
-
-
-          {/* =====================================================
-              HERO FLOATING UI
-          ===================================================== */}
-          <div className="landing-hero-visual">
-
-            <div className="landing-floating-panel">
-
-              <div className="landing-panel-top">
-
-                <div className="landing-panel-brand">
-                  <span className="landing-panel-logo">
-                    C
-                  </span>
-
-                  <div>
-                    <strong>CampusAI</strong>
-                    <span>Student Dashboard</span>
-                  </div>
-                </div>
-
-                <span className="landing-panel-live">
-                  <span />
-                  Live
-                </span>
-
-              </div>
-
-
-              <div className="landing-panel-heading">
-                <span>Good morning 👋</span>
-                <strong>How can we help?</strong>
-              </div>
-
-
-              <div className="landing-panel-grid">
-
-                <div className="landing-panel-card">
-                  <div className="landing-panel-card-icon">
-                    <ClipboardCheck size={18} />
-                  </div>
-
-                  <strong>Complaints</strong>
-                  <span>Report an issue</span>
-                </div>
-
-
-                <div className="landing-panel-card">
-                  <div className="landing-panel-card-icon">
-                    <MessageCircle size={18} />
-                  </div>
-
-                  <strong>AI Assistant</strong>
-                  <span>Get instant help</span>
-                </div>
-
-
-                <div className="landing-panel-card">
-                  <div className="landing-panel-card-icon">
-                    <Building2 size={18} />
-                  </div>
-
-                  <strong>Notices</strong>
-                  <span>Campus updates</span>
-                </div>
-
-
-                <div className="landing-panel-card">
-                  <div className="landing-panel-card-icon">
-                    <CalendarDays size={18} />
-                  </div>
-
-                  <strong>Timetable</strong>
-                  <span>View schedule</span>
-                </div>
-
-              </div>
-
-
-              <div className="landing-panel-status">
-
-                <div className="landing-status-icon">
-                  <CheckCircle2 size={18} />
-                </div>
-
-                <div>
-                  <strong>Complaint Submitted</strong>
-                  <span>AI analysis completed</span>
-                </div>
-
-                <span className="landing-status-time">
-                  Just now
-                </span>
-
-              </div>
-
-            </div>
-
-
-            {/* AI floating card */}
-            <div className="landing-float-card landing-ai-card">
-
-              <div className="landing-float-icon">
-                <Sparkles size={16} />
-              </div>
-
-              <div>
-                <strong>CampusAI Assistant</strong>
-                <span>Ready to help you</span>
-              </div>
-
-              <div className="landing-online-dot" />
-
-            </div>
-
-
-            {/* handwritten text */}
-            <div className="landing-handwritten">
-              Your Campus AI
-              <br />
-              Companion
-            </div>
-
-
-            <div className="landing-sparkle landing-sparkle-one">
-              ✦
-            </div>
-
-            <div className="landing-sparkle landing-sparkle-two">
-              ✦
             </div>
 
           </div>
