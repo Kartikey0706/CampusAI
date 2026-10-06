@@ -1797,3 +1797,232 @@ video {
     height: 120%;
   }
 }
+
+/* ================================================================
+   FINAL CAMPUSAI HERO CLEANUP
+   Removes old dashboard/mockup decorations
+================================================================ */
+
+/* Remove old dashboard visual completely */
+.landing-hero-visual {
+  display: none !important;
+}
+
+/* Remove floating AI card */
+.landing-ai-card,
+.landing-float-card {
+  display: none !important;
+}
+
+/* Remove handwritten decoration */
+.landing-handwritten {
+  display: none !important;
+}
+
+/* Remove sparkle decorations */
+.landing-sparkle,
+.landing-sparkle-one,
+.landing-sparkle-two {
+  display: none !important;
+}
+
+
+/* ================================================================
+   FINAL HERO LAYOUT
+================================================================ */
+
+.landing-hero {
+  display: flex;
+  align-items: center;
+  min-height: 720px;
+  padding: 110px 8vw 100px;
+  overflow: hidden;
+  background: #07140d;
+}
+
+.landing-hero-content {
+  width: min(760px, 100%);
+  max-width: 760px;
+  position: relative;
+  z-index: 5;
+}
+
+
+/* ================================================================
+   HERO VIDEO
+================================================================ */
+
+.landing-hero-bg-video {
+  position: absolute;
+  inset: -8%;
+  z-index: -3;
+
+  width: 116%;
+  height: 116%;
+  max-width: none;
+
+  object-fit: cover;
+  object-position: center 42%;
+
+  pointer-events: none;
+
+  filter:
+    brightness(0.48)
+    saturate(0.65);
+}
+
+
+/* ================================================================
+   HERO OVERLAY
+================================================================ */
+
+.landing-hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 20, 13, 0.96) 0%,
+      rgba(7, 20, 13, 0.86) 35%,
+      rgba(7, 20, 13, 0.64) 68%,
+      rgba(7, 20, 13, 0.48) 100%
+    );
+}
+
+.landing-hero-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 20, 13, 0.12) 0%,
+      rgba(7, 20, 13, 0.08) 45%,
+      rgba(7, 20, 13, 0.72) 100%
+    );
+}
+
+
+/* ================================================================
+   HERO TEXT
+================================================================ */
+
+.landing-hero h1 {
+  color: #ffffff;
+}
+
+.landing-hero h1 span {
+  color: #b9f0ca;
+}
+
+.landing-hero-content > p {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+
+/* ================================================================
+   HERO BUTTONS
+================================================================ */
+
+.landing-primary-btn {
+  color: #102019;
+  background: #d8f8e5;
+  border-color: #d8f8e5;
+}
+
+.landing-secondary-btn {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.26);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* ================================================================
+   TRUST
+================================================================ */
+
+.landing-trust {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.landing-trust strong {
+  color: #ffffff;
+}
+
+.landing-trust-text span {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.landing-avatars span {
+  border-color: rgba(7, 20, 13, 0.9);
+  background: #d8f8e5;
+  color: #102019;
+}
+
+
+/* ================================================================
+   MOBILE
+================================================================ */
+
+@media (max-width: 900px) {
+
+  .landing-hero {
+    min-height: 680px;
+    padding: 90px 6vw 80px;
+  }
+
+  .landing-hero-content {
+    max-width: 720px;
+  }
+
+  .landing-hero-bg-video {
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    object-position: center 42%;
+  }
+
+  .landing-hero-video-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 17, 11, 0.76) 0%,
+        rgba(6, 17, 11, 0.84) 50%,
+        rgba(6, 17, 11, 0.96) 100%
+      );
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .landing-hero {
+    min-height: 650px;
+    padding: 75px 20px 65px;
+  }
+
+  .landing-hero-bg-video {
+    inset: -12%;
+    width: 124%;
+    height: 124%;
+    object-position: center 42%;
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(43px, 12vw, 60px);
+    letter-spacing: -3px;
+  }
+
+  .landing-hero-content > p {
+    font-size: 15px;
+  }
+}
+
