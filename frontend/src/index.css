@@ -173,3 +173,77 @@
     text-align: center;
   }
 }
+
+/* =========================================================
+   CAMPUSAI LANDING — DRONE VIDEO HERO
+   ========================================================= */
+
+.landing-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+}
+
+.landing-hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 38%;
+  z-index: -3;
+  pointer-events: none;
+}
+
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 20, 13, 0.90) 0%,
+      rgba(7, 20, 13, 0.68) 40%,
+      rgba(7, 20, 13, 0.40) 75%,
+      rgba(7, 20, 13, 0.32) 100%
+    );
+}
+
+.landing-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 16, 11, 0.05) 0%,
+      rgba(6, 16, 11, 0.12) 50%,
+      rgba(6, 16, 11, 0.62) 100%
+    );
+}
+
+@media (max-width: 900px) {
+  .landing-hero {
+    min-height: 680px;
+  }
+
+  .landing-hero-bg-video {
+    object-position: center 36%;
+  }
+}
+
+@media (max-width: 650px) {
+  .landing-hero {
+    min-height: 700px;
+  }
+
+  .landing-hero-bg-video {
+    object-position: center 34%;
+  }
+}
