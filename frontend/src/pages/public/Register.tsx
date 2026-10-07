@@ -30,7 +30,7 @@ function Register() {
 	return (
 		<main className="auth">
 			<div className="auth-box">
-				<button type="button" onClick={() => navigate("/")} aria-label="Back to home" className="mb-8 inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+				<button type="button" onClick={() => navigate("/")} aria-label="Back to home" className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 					<ArrowLeft size={16} />
 				</button>
 				<h1>Create student account</h1>
@@ -49,3 +49,4 @@ function Register() {
 }
 
 export default Register;
+
