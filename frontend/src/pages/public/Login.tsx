@@ -65,7 +65,7 @@ function Login() {
             type="button"
             onClick={() => navigate("/")}
             aria-label="Back to home"
-            className="mb-8 inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <ArrowLeft size={16} />
           </button>
@@ -76,7 +76,7 @@ function Login() {
 
           {error && <div className="error">{error}</div>}
 
-          <div className="mt-7 flex gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-1">
+          <div className="mt-4 flex gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-1">
             {[
               { value: "student", label: "Student Login" },
               { value: "admin", label: "Admin Login" },
@@ -96,7 +96,7 @@ function Login() {
             ))}
           </div>
 
-          <form onSubmit={handleSubmit} className="login-form mt-6">
+          <form onSubmit={handleSubmit} className="login-form mt-4">
             <label>
               {identifierLabel}
               <input
