@@ -91,7 +91,7 @@ function StudentDashboard() {
       return "border-amber-200 bg-amber-50 text-amber-700";
     }
 
-    return "border-sky-200 bg-sky-50 text-sky-700";
+    return "border-sky-200 bg-stone-50 text-sky-700";
   }
 
   const userName = getAuthenticatedUserName();
@@ -112,10 +112,10 @@ function StudentDashboard() {
       label: "Under Review",
       value: stats.underReview,
       note: "Awaiting attention",
-      iconBg: "bg-sky-50",
-      iconText: "text-sky-600",
-      border: "border-sky-100",
-      number: "text-sky-950",
+      iconBg: "bg-stone-100",
+      iconText: "text-stone-600",
+      border: "border-stone-200",
+      number: "text-stone-900",
     },
     {
       Icon: Clock3,
@@ -167,7 +167,7 @@ function StudentDashboard() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/student/report"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-stone-950 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-stone-800"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-stone-950 px-5 py-3 text-sm font-semibold !text-white shadow-sm transition hover:bg-stone-800"
               >
                 <Plus size={18} />
                 Report an Issue
