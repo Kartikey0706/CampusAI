@@ -1,0 +1,77 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  fill="none"
+>
+  <rect width="512" height="512" rx="110" fill="#0A0A0A"/>
+
+  <rect
+    x="18"
+    y="18"
+    width="476"
+    height="476"
+    rx="96"
+    stroke="#202020"
+    stroke-width="3"
+  />
+
+  <!-- Graduation cap -->
+  <path
+    d="M104 176L256 105L408 176L256 247L104 176Z"
+    fill="#F5F5F5"
+  />
+
+  <path
+    d="M154 199V245C154 245 196 283 256 283C316 283 358 245 358 245V199L256 247L154 199Z"
+    fill="#D9D9D9"
+  />
+
+  <path
+    d="M408 176V256"
+    stroke="#F5F5F5"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+
+  <rect
+    x="392"
+    y="250"
+    width="32"
+    height="58"
+    rx="14"
+    fill="#F5F5F5"
+  />
+
+  <!-- C -->
+  <path
+    d="M337 293
+       C315 269 286 256 254 256
+       C184 256 128 312 128 382
+       C128 452 184 508 254 508
+       C291 508 324 493 348 466"
+    stroke="url(#cGradient)"
+    stroke-width="46"
+    stroke-linecap="round"
+  />
+
+  <!-- Spark -->
+  <path
+    d="M256 323L266 346L289 356L266 366L256 389L246 366L223 356L246 346Z"
+    fill="#DDFBEF"
+  />
+
+  <defs>
+    <linearGradient
+      id="cGradient"
+      x1="135"
+      y1="270"
+      x2="350"
+      y2="470"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.48" stop-color="#E7E7E7"/>
+      <stop offset="1" stop-color="#8E8E8E"/>
+    </linearGradient>
+  </defs>
+</svg>
