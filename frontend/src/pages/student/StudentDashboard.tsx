@@ -286,7 +286,7 @@ function StudentDashboard() {
 
             <Link
               to="/student/report"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold !text-stone-950 transition hover:bg-stone-100"
             >
               Report a new issue
               <ArrowRight size={16} />
@@ -459,3 +459,4 @@ function StudentDashboard() {
 }
 
 export default StudentDashboard;
+
