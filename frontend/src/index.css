@@ -1627,3 +1627,57 @@ html.campusai-dark .landing-hero::before {
     );
 }
 
+/* Fix styles for the current landing page markup */
+.landing-about-content > p {
+  color: #737d77;
+  line-height: 1.8;
+  font-size: 15px;
+  margin-top: 16px;
+}
+
+.landing-cta-content {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 56px 32px;
+  border-radius: 24px;
+  background: #17211c;
+  color: #ffffff;
+  text-align: center;
+}
+
+.landing-cta-content .landing-section-label {
+  color: #9ebdad;
+}
+
+.landing-cta-content h2 {
+  color: #ffffff;
+}
+
+.landing-cta-content h2 span {
+  color: #9bbbaa;
+}
+
+.landing-cta-content p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: #a8b6ae;
+  line-height: 1.7;
+}
+
+.landing-cta-btn {
+  margin-top: 24px;
+}
+
+/* Dark theme text contrast */
+html.campusai-dark .landing-about-content > p {
+  color: #aab7b0;
+}
+
+@media (max-width: 700px) {
+  .landing-cta-content {
+    padding: 38px 20px;
+    border-radius: 18px;
+  }
+}
+
+
