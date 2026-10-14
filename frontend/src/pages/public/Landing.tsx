@@ -132,21 +132,14 @@ function Landing() {
 
             </div>
 
-            <div className="landing-trust">
+            
+<div className="landing-trust">
+  <div>
+    <strong>Made for SRMU</strong>
+    <span>Report and track campus issues in one place</span>
+  </div>
+</div>
 
-              <div className="landing-avatars">
-                <span>KS</span>
-                <span>AS</span>
-                <span>RK</span>
-                <span>+</span>
-              </div>
-
-              <div>
-                <strong>+1.2k</strong>
-                <span>Trusted by SRMU Students</span>
-              </div>
-
-            </div>
 
           </div>
 
