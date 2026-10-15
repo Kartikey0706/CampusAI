@@ -1,546 +1,295 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  BrainCircuit,
-  Building2,
-  CalendarDays,
-  MessageCircle,
-  Moon,
-  Sparkles,
-  Sun,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import "./landing.css";
+
+// Same categories the backend classifier knows about.
+const CATEGORIES = [
+  "Wi-Fi",
+  "Water",
+  "Electricity",
+  "Hostel",
+  "Mess",
+  "Classroom",
+  "Lab",
+  "Library",
+  "Transport",
+  "Fees",
+  "Faculty",
+  "Timetable",
+];
+
+// Same stages the complaint timeline uses in the app.
+const STAGES = ["Submitted", "AI Analysis", "Under Review", "In Progress", "Resolved"];
+const STAGES_REACHED = 3;
+
+type Row = {
+  title: string;
+  category: string;
+  priority: "High" | "Medium" | "Low";
+  status: "Under Review" | "In Progress" | "Resolved";
+};
+
+// Made-up entries, labelled as such on the page.
+const SAMPLE_ROWS: Row[] = [
+  { title: "Wi-Fi dropping in Hostel B", category: "Wi-Fi", priority: "High", status: "In Progress" },
+  { title: "Classroom projector not working", category: "Classroom", priority: "Medium", status: "Under Review" },
+  { title: "Water supply interruption", category: "Water", priority: "High", status: "Under Review" },
+  { title: "Library AC not cooling", category: "Library", priority: "Low", status: "Resolved" },
+];
+
+function statusClass(status: Row["status"]) {
+  if (status === "In Progress") return "lp-st lp-st-progress";
+  if (status === "Resolved") return "lp-st lp-st-done";
+  return "lp-st";
+}
 
 function Landing() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("campusai-theme") === "dark";
-  });
-
-  const [showCampusVideo, setShowCampusVideo] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("campusai-dark", darkMode);
-
-    localStorage.setItem(
-      "campusai-theme",
-      darkMode ? "dark" : "light"
-    );
-  }, [darkMode]);
-
-  const toggleTheme = () => {
-    setDarkMode((prev) => !prev);
-  };
-
   return (
-    <div className="landing-page">
-
-      {/* ================= NAVBAR ================= */}
-      <header className="landing-nav">
-        <Link to="/" className="landing-brand">
-          <span className="landing-brand-mark">C</span>
-
-          <span>
-            Campus<span>AI</span>
-          </span>
-        </Link>
-
-        <nav className="landing-nav-links">
-          <a href="#home">Home</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div className="landing-nav-actions">
-
-          {/* ================= THEME BUTTON ================= */}
-          <button
-            type="button"
-            className="landing-theme-btn"
-            aria-label={
-              darkMode
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-            }
-            title={
-              darkMode
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-            }
-            onClick={toggleTheme}
-          >
-            {darkMode ? (
-              <Sun size={17} />
-            ) : (
-              <Moon size={17} />
-            )}
-          </button>
-
-          <Link to="/login" className="landing-login">
-            Login
+    <div className="lp">
+      <div className="lp-wrap">
+        {/* nav */}
+        <header className="lp-nav">
+          <Link to="/" className="lp-logo">
+            <b>C</b>CampusAI
           </Link>
-
-          <Link to="/register" className="landing-nav-cta">
-            Get Started
-          </Link>
-        </div>
-      </header>
-
-      {/* ================= HERO ================= */}
-      <main>
-
-        <section className="landing-hero" id="home">
-
-          <div className="landing-hero-content">
-
-            <div className="landing-badge">
-              <span className="landing-badge-dot" />
-              <span>Built for SRMU</span>
-            </div>
-
-            <h1>
-              Smarter Campus.
-              <br />
-              <span>Better Experience.</span>
-            </h1>
-
-            <p>
-              CampusAI makes campus life simpler by helping students report
-              problems, get assistance, and stay connected with everything
-              happening around their university.
-            </p>
-
-            <div className="landing-hero-buttons">
-
-              <Link
-                to="/register"
-                className="landing-primary-btn"
-              >
-                Get Started
-                <ArrowRight size={17} />
-              </Link>
-
-              
-              <button
-                type="button"
-                className="landing-secondary-btn"
-                onClick={() => setShowCampusVideo(true)}
-              >
-                <span className="landing-play-icon">▶</span>
-                Explore SRMU
-              </button>
-
-            </div>
-
-            
-<div className="landing-trust">
-  <div>
-    <strong>Made for SRMU</strong>
-    <span>Report and track campus issues in one place</span>
-  </div>
-</div>
-
-
-          </div>
-
-          {/* ================= HERO VIDEO BACKGROUND ================= */}
-          <video
-            className="landing-hero-bg-video"
-            src="/srmu-drone.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-          />
-
-        </section>
-
-        {/* ================= FEATURES ================= */}
-        <section
-          className="landing-features"
-          id="features"
-        >
-
-          <div className="landing-section-heading">
-
-            <div className="landing-small-label">
-              <span />
-              Everything you need
-            </div>
-
-            <h2>
-              Everything You Need,
-              <br />
-              <span>All in One Place.</span>
-            </h2>
-
-            <p>
-              One simple platform for a smarter, more connected campus
-              experience.
-            </p>
-
-          </div>
-
-          <div className="landing-feature-grid">
-
-            {/* Feature 1 */}
-            <div className="landing-feature-card">
-
-              <div className="landing-feature-icon">
-                <BrainCircuit size={21} />
-              </div>
-
-              <h3>AI Complaint Analysis</h3>
-
-              <p>
-                CampusAI understands your complaint and automatically helps
-                identify its category, urgency, sentiment and department.
-              </p>
-
-              <span className="landing-feature-link">
-                AI-powered
-                <ArrowRight size={14} />
-              </span>
-
-            </div>
-
-            {/* Feature 2 */}
-            <div className="landing-feature-card">
-
-              <div className="landing-feature-icon">
-                <MessageCircle size={21} />
-              </div>
-
-              <h3>AI Assistant</h3>
-
-              <p>
-                Get quick guidance while reporting problems and make the
-                complaint process easier and more intuitive.
-              </p>
-
-              <span className="landing-feature-link">
-                Always available
-                <ArrowRight size={14} />
-              </span>
-
-            </div>
-
-            {/* Feature 3 */}
-            <div className="landing-feature-card">
-
-              <div className="landing-feature-icon">
-                <Building2 size={21} />
-              </div>
-
-              <h3>Notices & Updates</h3>
-
-              <p>
-                Stay informed about important campus announcements and
-                updates from one organized place.
-              </p>
-
-              <span className="landing-feature-link">
-                Stay updated
-                <ArrowRight size={14} />
-              </span>
-
-            </div>
-
-            {/* Feature 4 */}
-            <div className="landing-feature-card">
-
-              <div className="landing-feature-icon">
-                <CalendarDays size={21} />
-              </div>
-
-              <h3>Timetable & Academics</h3>
-
-              <p>
-                Keep your academic information accessible so you can spend
-                less time searching and more time learning.
-              </p>
-
-              <span className="landing-feature-link">
-                Stay organized
-                <ArrowRight size={14} />
-              </span>
-
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* ================= HOW IT WORKS ================= */}
-        <section
-          className="landing-how"
-          id="how-it-works"
-        >
-
-          <div className="landing-how-content">
-
-            <div className="landing-small-label landing-light-label">
-              <span />
-              Simple by design
-            </div>
-
-            <h2>
-              From problem
-              <br />
-              <span>to solution.</span>
-            </h2>
-
-            <p>
-              CampusAI removes the unnecessary complexity from campus support.
-              Just tell us what happened and let AI help with the rest.
-            </p>
-
-            <div className="landing-steps">
-
-              <div className="landing-step">
-
-                <span>01</span>
-
-                <div>
-                  <h3>Report</h3>
-
-                  <p>
-                    Tell us what happened in a simple complaint form.
-                  </p>
-                </div>
-
-              </div>
-
-              <div className="landing-step">
-
-                <span>02</span>
-
-                <div>
-                  <h3>AI Understands</h3>
-
-                  <p>
-                    AI analyses category, urgency, sentiment and routing.
-                  </p>
-                </div>
-
-              </div>
-
-              <div className="landing-step">
-
-                <span>03</span>
-
-                <div>
-                  <h3>Track</h3>
-
-                  <p>
-                    Follow your complaint until the issue reaches resolution.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* ================= DASHBOARD CARD ================= */}
-          <div className="landing-how-card">
-
-            <div className="landing-dashboard-top">
-
-              <div>
-                <span>Campus overview</span>
-                <strong>Good morning 👋</strong>
-              </div>
-
-              <div className="landing-dashboard-avatar">
-                K
-              </div>
-
-            </div>
-
-            <div className="landing-dashboard-stat">
-
-              <div>
-                <span>Active complaints</span>
-                <strong>24</strong>
-              </div>
-
-              <div className="landing-stat-progress">
-                <span />
-              </div>
-
-            </div>
-
-            <div className="landing-dashboard-row">
-
-              <div>
-                <span className="landing-status-dot green" />
-                Resolved
-              </div>
-
-              <strong>18</strong>
-
-            </div>
-
-            <div className="landing-dashboard-row">
-
-              <div>
-                <span className="landing-status-dot orange" />
-                In progress
-              </div>
-
-              <strong>4</strong>
-
-            </div>
-
-            <div className="landing-dashboard-row">
-
-              <div>
-                <span className="landing-status-dot gray" />
-                Pending
-              </div>
-
-              <strong>2</strong>
-
-            </div>
-
-            <div className="landing-ai-note">
-              <Sparkles size={15} />
-              <span>AI insights updated just now</span>
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* ================= ABOUT ================= */}
-        <section
-          className="landing-about"
-          id="about"
-        >
-
-          <div>
-
-            <div className="landing-small-label">
-              <span />
-              Why CampusAI
-            </div>
-
-            <h2>
-              A better way to
-              <br />
-              <span>experience campus.</span>
-            </h2>
-
-          </div>
-
-          <p>
-            CampusAI brings students, campus information and intelligent
-            support together in one clean platform — designed specifically
-            around the everyday needs of university life.
-          </p>
-
-        </section>
-
-        {/* ================= CTA ================= */}
-        <section
-          className="landing-cta"
-          id="contact"
-        >
-
-          <div className="landing-cta-inner">
-
-            <div>
-
-              <span>READY TO GET STARTED?</span>
-
-              <h2>
-                Make campus support
-                <br />
-                feel effortless.
-              </h2>
-
-              <p>
-                Join CampusAI and experience a smarter way to connect with
-                your campus.
-              </p>
-
-            </div>
-
-            <Link
-              to="/register"
-              className="landing-cta-button"
-            >
-              Get Started
-              <ArrowRight size={17} />
+          <nav className="lp-nav-links" aria-label="Sections">
+            <a href="#what">What it does</a>
+            <a href="#admin">For admins</a>
+            <a href="#about">About</a>
+          </nav>
+          <div className="lp-nav-end">
+            <Link to="/login" className="lp-login">
+              Log in
             </Link>
+            <Link to="/register" className="lp-btn lp-btn-sm">
+              Get started <ArrowRight size={14} />
+            </Link>
+          </div>
+        </header>
 
+        {/* hero */}
+        <div className="lp-hero">
+          <div>
+            <p className="lp-eyebrow">For students of SRMU</p>
+            <h1>Report a campus problem once. It goes to the right department.</h1>
+            <p className="lp-lead">
+              Write what happened in your own words. CampusAI suggests the
+              category, urgency and department, and you can follow the status
+              until it is resolved.
+            </p>
+            <div className="lp-actions">
+              <Link to="/register" className="lp-btn">
+                Report an issue <ArrowRight size={16} />
+              </Link>
+              <a className="lp-tlink" href="#what">
+                See what it does
+              </a>
+            </div>
+            <p className="lp-hero-note">
+              Made for students of Shri Ramswaroop Memorial University. This is
+              an academic prototype, not an official university system.
+            </p>
           </div>
 
-        </section>
-
-      </main>
-
-      {/* ================= FOOTER ================= */}
-      <footer className="landing-footer">
-
-        <Link
-          to="/"
-          className="landing-footer-brand"
-        >
-          <span className="landing-brand-mark">
-            C
-          </span>
-
-          Campus<span>AI</span>
-        </Link>
-
-        <span>
-          © 2026 CampusAI
-        </span>
-
-        <span>
-          Smarter campus. Better experience.
-        </span>
-
-      </footer>
-
-      {showCampusVideo && (
-  <div
-    className="campus-video-overlay"
-    onClick={() => setShowCampusVideo(false)}
-  >
-    <div
-      className="campus-video-modal"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        type="button"
-        className="campus-video-close"
-        onClick={() => setShowCampusVideo(false)}
-        aria-label="Close campus video"
-      >
-        ×
-      </button>
-
-      <video
-        className="campus-video-player"
-        src="/srmu-drone.mp4"
-        controls
-        autoPlay
-        playsInline
-      />
-
-      <div className="campus-video-caption">
-        <strong>Explore Shri Ramswaroop Memorial University</strong>
-        <span>A glimpse of the campus behind CampusAI.</span>
+          <aside className="lp-card" aria-label="Example complaint">
+            <p className="lp-tag">Example complaint</p>
+            <h3>Water supply interruption</h3>
+            <p className="lp-loc">Hostel Block A, ground floor</p>
+            <dl className="lp-grid">
+              <div>
+                <dt>Category</dt>
+                <dd>Water</dd>
+              </div>
+              <div>
+                <dt>Sentiment</dt>
+                <dd>Negative</dd>
+              </div>
+              <div>
+                <dt>Urgency</dt>
+                <dd className="lp-hot">High</dd>
+              </div>
+              <div>
+                <dt>Priority</dt>
+                <dd className="lp-hot">High</dd>
+              </div>
+              <div className="lp-w">
+                <dt>Department</dt>
+                <dd>Maintenance Department</dd>
+              </div>
+            </dl>
+            <ol className="lp-stages" aria-label="Status">
+              {STAGES.map((s, i) => (
+                <li key={s} className={i < STAGES_REACHED ? "lp-on" : ""}>
+                  {s}
+                </li>
+              ))}
+            </ol>
+          </aside>
+        </div>
       </div>
-    </div>
-  </div>
-)}
 
+      {/* what it does */}
+      <section id="what">
+        <div className="lp-wrap lp-two">
+          <div>
+            <p className="lp-eyebrow">What it does</p>
+            <h2 className="lp-h2">What happens after you submit a complaint.</h2>
+            <p className="lp-sub">
+              Three things, in this order. Nothing for you to fill in beyond
+              the description.
+            </p>
+          </div>
+          <ol className="lp-rows">
+            <li>
+              <span className="lp-n">01</span>
+              <div>
+                <h3>You describe it</h3>
+                <p>
+                  A title, a few lines and the location. There is no category
+                  dropdown to guess at.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span className="lp-n">02</span>
+              <div>
+                <h3>It is analysed</h3>
+                <p>
+                  Category, sentiment, urgency, priority and department are
+                  suggested from your text. This runs on Python and NLP code
+                  inside the project and needs no external LLM API. If it
+                  fails, the complaint is still saved with its values marked
+                  pending.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span className="lp-n">03</span>
+              <div>
+                <h3>You follow it</h3>
+                <p>
+                  Open your complaint to see its status move from Under Review
+                  to In Progress to Resolved, with similar complaints shown
+                  next to it.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      {/* admin */}
+      <section className="lp-dark" id="admin">
+        <div className="lp-wrap lp-two lp-admin-cols">
+          <div>
+            <p className="lp-eyebrow">For admins</p>
+            <h2 className="lp-h2">Every complaint in one list, already sorted.</h2>
+            <p className="lp-sub">
+              Admins do not start from a blank inbox. Each complaint arrives
+              with its analysis attached.
+            </p>
+            <ul className="lp-checks">
+              <li>Search, and filter by status, category and priority</li>
+              <li>Open any complaint with its AI analysis and similar complaints</li>
+              <li>Update the status as work progresses</li>
+              <li>Dashboard and analytics for the whole campus</li>
+            </ul>
+          </div>
+
+          <div className="lp-panel" aria-label="Sample admin complaint list">
+            <div className="lp-panel-head">
+              <strong>Complaints</strong>
+              <span>Sample data</span>
+            </div>
+            <div className="lp-filters">
+              <span className="lp-on">All</span>
+              <span>Under Review</span>
+              <span>In Progress</span>
+              <span>Resolved</span>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Complaint</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {SAMPLE_ROWS.map((r) => (
+                  <tr key={r.title}>
+                    <td>{r.title}</td>
+                    <td>{r.category}</td>
+                    <td className={r.priority === "High" ? "lp-hot" : ""}>{r.priority}</td>
+                    <td>
+                      <span className={statusClass(r.status)}>{r.status}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="lp-panel-foot">Illustration with made-up entries.</div>
+          </div>
+        </div>
+      </section>
+
+      {/* categories */}
+      <section className="lp-cats">
+        <div className="lp-wrap">
+          <p className="lp-eyebrow">What you can report</p>
+          <p className="lp-catline">
+            {CATEGORIES.map((c) => (
+              <span key={c}>{c}</span>
+            ))}
+            .
+          </p>
+          <p className="lp-muted">
+            Anything else goes to General Administration, so nothing is dropped.
+          </p>
+        </div>
+      </section>
+
+      {/* about + cta */}
+      <section className="lp-about" id="about">
+        <div className="lp-wrap">
+          <div className="lp-two lp-about-cols">
+            <div>
+              <p className="lp-eyebrow">About</p>
+              <h2 className="lp-h2">Built by a student, for SRMU.</h2>
+            </div>
+            <p className="lp-sub lp-about-text">
+              CampusAI is an academic project. Students sign in with their roll
+              number, and complaints are stored in MongoDB Atlas. It is not an
+              official university system.
+            </p>
+          </div>
+
+          <div className="lp-cta">
+            <div>
+              <h2>Got something to report?</h2>
+              <p>Create an account with your roll number and submit your first complaint.</p>
+            </div>
+            <div className="lp-actions">
+              <Link to="/register" className="lp-btn">
+                Create an account <ArrowRight size={16} />
+              </Link>
+              <Link to="/login" className="lp-tlink">
+                I already have one
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="lp-footer">
+        <div className="lp-wrap">
+          <Link to="/" className="lp-logo">
+            <b>C</b>CampusAI
+          </Link>
+          <span>Academic prototype for SRMU, 2026</span>
+        </div>
+      </footer>
     </div>
   );
 }
