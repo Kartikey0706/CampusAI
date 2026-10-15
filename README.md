@@ -1,171 +1,118 @@
 # CampusAI
 
-## What is CampusAI?
+**CampusAI** is an AI-assisted campus complaint management system designed around the needs of SRMU students. It provides a central place to report campus issues and helps administrators review, prioritize, and track complaints.
 
-CampusAI is an AI-powered campus complaint management system.
-Students can report problems such as Wi-Fi, water, hostel or classroom issues.
-Local AI/NLP services analyze each complaint and suggest useful information.
-The complaint is stored safely in MongoDB Atlas.
-Administrators can view, filter and update complaint status.
+> **Project status:** Academic prototype in active development. CampusAI is an independent student project, not an official SRMU system.
 
-CampusAI is an SRMU-focused academic prototype, not an official university system.
+## Live Preview
 
-## Main Features
+- **Frontend:** https://campus-ai-sepia.vercel.app/
+- **Backend:** Hosted on Render as `campusai-backend`. The exact service URL and environment variables are managed in the Render dashboard.
+- **API documentation (when the backend is running):** `/docs`
+- **Health check (when the backend is running):** `/health`
 
-### Student
+The frontend is deployed on Vercel and the backend is hosted separately. If a recent GitHub change does not appear on the live site, check the deployment status in Vercel or Render and trigger a manual deploy if required.
 
-- Login using roll number and password
-- Submit a complaint with title, description and location
-- View submitted complaints
-- Open a complaint detail page
-- See category, sentiment, urgency, department and priority
-- See complaint status and similar complaints
+## What CampusAI Does
 
-### AI Analysis
+### Student features
+- Register and log in.
+- Submit a complaint with a title, description, and location.
+- View submitted complaints and open individual complaint details.
+- Review complaint category, sentiment, urgency, suggested department, and priority.
+- See complaint status and similar complaints where available.
 
-For each new complaint, CampusAI provides:
+### Admin features
+- View and search complaints.
+- Filter complaints by status, category, and priority.
+- Open complaint details and review the AI-assisted analysis.
+- Update complaint status.
+- View dashboard statistics, category distribution, and analytics.
 
-- Category, such as Wi-Fi, Water, Hostel, Fees or Library
-- Sentiment: Positive, Neutral or Negative
-- Urgency: Low, Medium or High
-- Department recommendation
-- Priority recommendation
-- Similar complaint detection
+### AI-assisted complaint analysis
+CampusAI uses local Python services to help analyse complaints. Depending on the complaint and available services, the analysis can provide:
+- **Category** such as Wi-Fi, water, hostel, fees, or library.
+- **Sentiment**: positive, neutral, or negative.
+- **Urgency**: low, medium, or high.
+- **Suggested department and priority.**
+- **Similar-complaint matching** to help identify repeated issues.
 
-The analysis uses the local Python services in `backend/app/services/`.
-It does not require an external LLM API. If analysis fails, the complaint is still saved with safe pending values.
+The system is designed to work without an external LLM API. AI output is advisory; administrators remain responsible for reviewing complaints and making final decisions. If analysis is unavailable, complaint handling should not be treated as a substitute for administrative review.
 
-### Admin
-
-- View all complaints
-- Search complaints
-- Filter by status, category and priority
-- View complaint details
-- View AI analysis and similar complaints
-- Update complaint status
-- View dashboard statistics
-- View category distribution and analytics
-
-## How the System Works
+## How It Works
 
 ```text
-Student
-   |
-React Frontend
-   |
-FastAPI Backend
-   |
-AI/NLP Analysis
-   |
+Student / Admin
+      |
+React + TypeScript frontend
+      |
+FastAPI backend
+      |
+Authentication, complaint routes and AI services
+      |
 MongoDB Atlas
-   |
-Admin Dashboard
 ```
 
-1. The student logs in and submits a complaint from the React frontend.
-2. FastAPI checks the request and the student's JWT token.
-3. The backend saves the complaint in MongoDB and runs the local analysis services.
-4. The admin can review the complaint, see the recommendations and update its status.
+1. A student submits a complaint through the frontend.
+2. The FastAPI backend validates the request and checks authentication where required.
+3. The complaint is stored in MongoDB Atlas and analysed by the backend services.
+4. Students can track their complaints, while administrators can review and update them.
 
 ## Technology Stack
 
-### Frontend
+| Area | Technologies |
+| --- | --- |
+| Frontend | React, TypeScript, Vite, Tailwind CSS, React Router |
+| Backend | Python, FastAPI, Uvicorn, Pydantic |
+| Database | MongoDB Atlas, PyMongo |
+| Authentication | JWT (`python-jose`), password hashing (`passlib`, `bcrypt`) |
+| AI / analysis | scikit-learn, joblib, local category and analysis services |
+| Deployment | Vercel (frontend), Render (backend) |
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- Lucide React icons
+Semantic similarity can use `sentence-transformers` when available, with a local token-based fallback.
 
-### Backend
-
-- Python
-- FastAPI
-- Uvicorn
-- Pydantic
-
-### Database
-
-- MongoDB Atlas
-- PyMongo
-
-### Authentication
-
-- JWT using `python-jose`
-- Password hashing using `passlib` and `bcrypt`
-
-### AI/NLP
-
-- `scikit-learn` and `joblib` for local model support
-- `sentence-transformers` for semantic similarity when available
-- A local token-based similarity fallback when the embedding model is unavailable
-
-## Project Structure
+## Repository Structure
 
 ```text
-CampusAI_FINAL_FIXED/
-├── frontend/
-│   ├── src/
-│   │   ├── layouts/       # Student and admin layouts
-│   │   ├── pages/         # Public, student and admin pages
-│   │   ├── services/      # Supporting frontend services
-│   │   ├── components/    # Shared frontend components
-│   │   ├── api.ts         # Active frontend API helper
-│   │   └── App.tsx        # Frontend routes and access guards
-│   ├── public/
-│   └── package.json
-│
+CampusAI/
+├── ai/
+│   ├── datasets/             # Complaint category training data
+│   ├── models/               # Saved local model files
+│   └── training/             # Model training scripts
 ├── backend/
 │   ├── app/
-│   │   ├── auth/          # JWT and password helpers
-│   │   ├── database/      # MongoDB connection
-│   │   ├── models/        # Request and data models
-│   │   ├── routes/        # Auth, complaint and protected routes
-│   │   └── services/      # Analysis and similarity services
+│   │   ├── auth/             # JWT and password helpers
+│   │   ├── database/         # MongoDB connection
+│   │   ├── models/           # Data and request models
+│   │   ├── routes/           # Authentication and complaint APIs
+│   │   └── services/         # Category, urgency, priority, sentiment and similarity
+│   ├── tests/                # Backend regression and service tests
 │   ├── requirements.txt
-│   └── .env               # Local secrets; do not commit this file
-│
-├── ai/
-│   ├── models/            # Local trained model files
-│   └── datasets/          # Training data
-│
+│   └── seed_demo_students.py
+├── frontend/
+│   ├── public/               # Static assets
+│   ├── src/
+│   │   ├── components/
+│   │   ├── layouts/
+│   │   ├── pages/             # Public, student and admin screens
+│   │   ├── services/
+│   │   └── App.tsx
+│   ├── package.json
+│   └── vercel.json
+├── .gitignore
 └── README.md
 ```
 
-## Complaint Status Flow
+## Run Locally
 
-```text
-Under Review
-      |
-In Progress
-      |
-Resolved
-```
+### Requirements
+- Python 3.10+ recommended.
+- Node.js and npm.
+- A MongoDB Atlas connection string or another compatible MongoDB deployment.
 
-- **Under Review:** The complaint has been received and is waiting for review.
-- **In Progress:** An administrator or department is working on the issue.
-- **Resolved:** The issue has been marked as solved.
+### 1. Start the backend
 
-## API Overview
-
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| POST | `/api/auth/login` | Login with roll number and password. |
-| POST | `/api/complaints` | Create a complaint for the logged-in student. |
-| GET | `/api/complaints/my` | Get complaints belonging to the logged-in student. |
-| GET | `/api/complaints/{id}` | View one complaint as a student. |
-| GET | `/api/complaints/admin/all` | Get all complaints for an admin. |
-| GET | `/api/complaints/admin/stats` | Get admin dashboard statistics. |
-| PATCH | `/api/complaints/{id}/status` | Update a complaint status as an admin. |
-
-Protected endpoints require a bearer JWT token.
-
-## Local Setup
-
-### Backend
-
-Open PowerShell in the project folder:
+In PowerShell, from the repository root:
 
 ```powershell
 cd backend
@@ -174,28 +121,30 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-Create or update `backend/.env` with your own values:
+Create `backend/.env` with your own values:
 
-```text
+```dotenv
 MONGODB_URL=your-mongodb-atlas-connection-string
 DATABASE_NAME=campusai
-JWT_SECRET=your-long-random-secret
+JWT_SECRET=replace-with-a-long-random-secret
 ```
 
-Do not commit real MongoDB passwords or JWT secrets.
+Keep real credentials private. Do not commit your `.env` file.
 
-Start the backend:
+Start the API:
 
 ```powershell
 python -m uvicorn app.main:app --reload
 ```
 
 The backend normally runs at `http://127.0.0.1:8000`.
-API documentation is available at `http://127.0.0.1:8000/docs`.
 
-### Frontend
+- API docs: `http://127.0.0.1:8000/docs`
+- Health check: `http://127.0.0.1:8000/health`
 
-Open another PowerShell window:
+### 2. Start the frontend
+
+Open a second PowerShell window from the repository root:
 
 ```powershell
 cd frontend
@@ -203,37 +152,81 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL shown in the terminal, normally `http://localhost:5173`.
+Open the local URL printed by Vite, usually `http://localhost:5173`.
 
-The frontend uses `http://127.0.0.1:8000` by default for the backend. To use another backend URL, create `frontend/.env` and add:
+The frontend uses `http://127.0.0.1:8000` as the default backend base URL. If you need to point it to another backend, create `frontend/.env` with:
 
-```text
+```dotenv
 VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-### Useful Checks
+Use the appropriate deployed backend URL for a deployed environment. Do not put database credentials or JWT secrets in frontend environment variables.
 
-Frontend type check:
+## Useful Checks
+
+Run these from the relevant folder.
+
+### Frontend type check
 
 ```powershell
+cd frontend
 npx tsc -b --pretty false
 ```
 
-Frontend production build:
+### Frontend production build
 
 ```powershell
+cd frontend
 npm run build
 ```
 
-Backend health check:
+### Backend tests
 
-```text
-http://127.0.0.1:8000/health
+```powershell
+cd backend
+python -m pytest
 ```
 
-## Safety Notes
+If `pytest` is not installed in the active environment, install it before running the test suite. Test coverage currently includes category/service behaviour, similarity behaviour, and timestamp serialization. Test results should be checked locally before treating a change as verified.
 
-- Do not commit `backend/.env` or `frontend/.env`.
-- Do not expose MongoDB credentials, JWT secrets or passwords.
-- Do not reset the MongoDB database during testing.
-- Admin users remain responsible for the final complaint decision.
+## Complaint Statuses
+
+- **Under Review:** Received and waiting for review.
+- **In Progress:** Being handled by the responsible administrator or department.
+- **Resolved:** Marked as resolved by an administrator.
+
+## API Overview
+
+The backend exposes authentication and complaint endpoints. Core routes include:
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `POST` | `/api/auth/login` | Log in |
+| `POST` | `/api/complaints` | Submit a complaint |
+| `GET` | `/api/complaints/my` | List the logged-in student's complaints |
+| `GET` | `/api/complaints/{id}` | Retrieve a complaint detail |
+| `GET` | `/api/complaints/admin/all` | List complaints for administrators |
+| `GET` | `/api/complaints/admin/stats` | Retrieve dashboard statistics |
+| `PATCH` | `/api/complaints/{id}/status` | Update a complaint status |
+
+Protected routes require a bearer JWT token. See the running API documentation at `/docs` for the current request and response schemas.
+
+## Current Development Notes
+
+- The landing page and public login/register screens are part of the React frontend.
+- Student complaint workflows and admin review/analytics screens are present in the repository.
+- The backend contains local category and complaint-analysis services plus automated service tests.
+- Frontend and backend deploy independently. A successful GitHub push does not guarantee that both hosted services have deployed the latest commit.
+- The local regression-test file `backend/tests/test_category_context_regressions.py` is not present in this repository snapshot; category-related regression coverage also exists in `backend/tests/test_category_service.py`. Preserve any additional uncommitted test cases before deleting an old local project copy.
+
+## Security and Data Notes
+
+- Never commit `.env` files, database connection strings, JWT secrets, passwords, or real student data.
+- Use placeholder values in documentation and examples.
+- Do not reset or delete the MongoDB database during routine testing.
+- Treat AI-generated category, urgency, sentiment, and priority as recommendations, not final decisions.
+- This project is a prototype and should not be presented as an official university service.
+
+## License
+
+No license is specified in this repository snapshot. Contact the project owner before reusing or redistributing the code.
