@@ -1,7 +1,7 @@
 import { BadgeCheck, IdCard, ShieldCheck, UserRound } from "lucide-react";
+import { getAuthenticatedUserName } from "../../utils/authUser";
 
 type StoredUser = {
-  name?: string;
   employee_id?: string;
   role?: string;
 };
@@ -19,7 +19,7 @@ function AdminSettings() {
   const user = getStoredUser();
 
   const fields = [
-    { label: "Admin name", value: user.name || "Administrator", icon: UserRound },
+    { label: "Admin name", value: getAuthenticatedUserName(), icon: UserRound },
     { label: "Employee ID", value: user.employee_id || "Not available", icon: IdCard },
     { label: "Account type", value: "Administrator", icon: BadgeCheck },
   ];
