@@ -382,7 +382,7 @@ function StudentDashboard() {
 
             <Link
               to="/student/report"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-stone-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-stone-800"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-stone-950 px-4 py-2.5 text-sm font-semibold !text-white transition hover:bg-stone-800"
             >
               <Plus size={16} />
               Report your first issue

@@ -1,78 +1,100 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { ClipboardList, FileText, LayoutDashboard, LogOut, Settings, Sparkles } from "lucide-react";
+import {
+  ClipboardList,
+  FileText,
+  LayoutDashboard,
+  LogOut,
+  Settings,
+  Sparkles,
+} from "lucide-react";
 import { logout } from "../api";
 import AccountProfile from "../components/layout/AccountProfile";
 import NotificationBell from "../components/layout/NotificationBell";
 
-const nav=[{to:"/student",label:"Dashboard",icon:LayoutDashboard,end:true},{to:"/student/complaints",label:"My Complaints",icon:ClipboardList},{to:"/student/report",label:"Report Issue",icon:FileText},{to:"/student/settings",label:"Settings",icon:Settings}];
+const nav = [
+  { to: "/student", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/student/complaints", label: "My Complaints", icon: ClipboardList },
+  { to: "/student/report", label: "Report Issue", icon: FileText },
+  { to: "/student/settings", label: "Settings", icon: Settings },
+];
 
-function StudentLayout(){
-  const navigate=useNavigate();
+function StudentLayout() {
+  const navigate = useNavigate();
 
-  function handleLogout(){
+  function handleLogout() {
     logout();
     navigate("/login");
   }
 
-  return <div className="min-h-screen bg-slate-50 text-slate-900">
-    <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white lg:flex lg:flex-col">
-      <div className="px-6 py-6">
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
-            <Sparkles size={18}/>
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900">
+      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white lg:flex lg:flex-col">
+        <div className="px-6 py-6">
+          <div className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+              <Sparkles size={18} />
+            </div>
+            <span className="text-xl font-bold tracking-tight">
+              Campus<span className="text-indigo-600">AI</span>
+            </span>
           </div>
-          <span className="text-xl font-bold tracking-tight">
-            Campus<span className="text-indigo-600">AI</span>
-          </span>
+          <p className="mt-2 text-xs text-slate-500">SRMU Campus Support</p>
         </div>
-        <p className="mt-2 text-xs text-slate-500">SRMU Campus Support</p>
-      </div>
 
-      <nav className="flex-1 space-y-1 px-4">
-        {nav.map(({to,label,icon:Icon,end})=>
-          <NavLink
-            key={to}
-            to={to}
-            end={end}
-            className={({isActive})=>`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${isActive?"bg-indigo-50 text-indigo-700":"text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
-          >
-            <Icon size={18}/>{label}
-          </NavLink>
-        )}
-      </nav>
+        <nav className="flex-1 space-y-1 px-4">
+          {nav.map(({ to, label, icon: Icon, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${isActive
+                  ? "bg-indigo-50 text-indigo-700"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                }`
+              }
+            >
+              <Icon size={18} />
+              {label}
+            </NavLink>
+          ))}
+        </nav>
 
-      <div className="m-4 rounded-2xl bg-slate-50 p-4">
-        <p className="text-sm font-semibold">Need help?</p>
-        <p className="mt-1 text-xs leading-5 text-slate-500">
-          CampusAI automatically routes your complaint to the right department.
-        </p>
-      </div>
-    </aside>
-
-    <div className="min-h-screen lg:pl-64">
-      <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur sm:px-6">
-        <p className="text-sm font-medium text-slate-500">Student Portal</p>
-
-        <div className="flex items-center gap-3">
-          <NotificationBell role="student" />
-
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-900"
-          >
-            <LogOut size={16}/> Sign out
-          </button>
-
-          <AccountProfile/>
+        <div className="m-4 rounded-2xl bg-slate-50 p-4">
+          <p className="text-sm font-semibold">Need help?</p>
+          <p className="mt-1 text-xs leading-5 text-slate-500">
+            CampusAI automatically routes your complaint to the right department.
+          </p>
         </div>
-      </header>
+      </aside>
 
-      <main className="p-4 sm:p-6 lg:p-8">
-        <Outlet/>
-      </main>
+      <div className="min-h-screen lg:pl-64">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 shadow-sm sm:px-6">
+          <p className="text-sm font-semibold text-slate-700">
+            Student Portal
+          </p>
+
+          <div className="flex items-center gap-3">
+            <NotificationBell role="student" />
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+            >
+              <LogOut size={16} /> Sign out
+            </button>
+
+            <AccountProfile />
+          </div>
+        </header>
+
+        <main className="p-4 sm:p-6 lg:p-8">
+          <Outlet />
+        </main>
+      </div>
     </div>
-  </div>
+  );
 }
 
 export default StudentLayout;
