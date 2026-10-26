@@ -1,9 +1,11 @@
 ﻿import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bell, Check, CheckCheck, ClipboardList, X } from "lucide-react";
 import { getAllComplaints, getMyComplaints } from "../../api";
 
 type NotificationItem = {
   id: string;
+  complaintId: string;
   title: string;
   message: string;
   time: string;
@@ -14,11 +16,20 @@ type NotificationBellProps = {
   role: "student" | "admin";
 };
 
+function isHighPriority(priority: unknown) {
+  return (
+    priority === "High" ||
+    priority === "Critical" ||
+    (typeof priority === "number" && priority >= 70)
+  );
+}
+
 function NotificationBell({ role }: NotificationBellProps) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [readIds, setReadIds] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   const storageKey =
@@ -28,187 +39,147 @@ function NotificationBell({ role }: NotificationBellProps) {
 
   useEffect(() => {
     try {
-      const saved = JSON.parse(
-        localStorage.getItem(storageKey) || "[]"
-      );
+      const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
       setReadIds(Array.isArray(saved) ? saved : []);
     } catch {
       setReadIds([]);
     }
   }, [storageKey]);
 
-  async function loadNotifications() {
-    setLoading(true);
+  useEffect(() => {
+    let cancelled = false;
 
-    try {
-      if (role === "student") {
-        const complaints = await getMyComplaints();
+    async function loadNotifications() {
+      try {
+        const data =
+          role === "student"
+            ? await getMyComplaints()
+            : await getAllComplaints();
 
-        const items: NotificationItem[] = [];
+        // Backend returns { count, complaints: [...] }
+        const complaints: any[] = Array.isArray(data)
+          ? data
+          : data?.complaints ?? [];
 
-        complaints.forEach((complaint: any) => {
-          const baseId = complaint.complaint_id;
-          const title = complaint.title || "Your complaint";
-          const time =
-            complaint.updated_at ||
-            complaint.created_at ||
-            new Date().toISOString();
+        let items: NotificationItem[] = [];
 
-          items.push({
-            id: `${baseId}-submitted`,
-            title: "Complaint received",
-            message: title,
-            time,
-            type: "info",
-          });
+        if (role === "student") {
+          items = complaints.map((complaint) => {
+            const title = complaint.title || "Your complaint";
+            const status = complaint.status || "Under Review";
 
-          if (complaint.status === "Resolved") {
-            items.push({
-              id: `${baseId}-resolved`,
-              title: "Complaint resolved",
-              message: `${title} has been resolved.`,
-              time,
-              type: "success",
-            });
-          } else if (complaint.status === "In Progress") {
-            items.push({
-              id: `${baseId}-progress`,
-              title: "Complaint in progress",
-              message: `${title} is being worked on.`,
-              time,
-              type: "warning",
-            });
-          } else {
-            items.push({
-              id: `${baseId}-review`,
-              title: "Complaint under review",
-              message: `${title} is currently under review.`,
-              time,
-              type: "info",
-            });
-          }
-        });
+            let heading = "Complaint under review";
+            let message = `${title} is currently under review.`;
+            let type: NotificationItem["type"] = "info";
 
-        items.sort(
-          (a, b) =>
-            new Date(b.time).getTime() -
-            new Date(a.time).getTime()
-        );
-
-        setNotifications(items.slice(0, 8));
-      } else {
-        const complaints = await getAllComplaints();
-
-        const items: NotificationItem[] = complaints.map(
-          (complaint: any) => {
-            const isHighPriority =
-              complaint.priority === "High" ||
-              complaint.priority === "Critical";
+            if (status === "Resolved") {
+              heading = "Complaint resolved";
+              message = `${title} has been resolved.`;
+              type = "success";
+            } else if (status === "In Progress") {
+              heading = "Complaint in progress";
+              message = `${title} is being worked on.`;
+              type = "warning";
+            }
 
             return {
-              id: `admin-${complaint.complaint_id}`,
-              title: isHighPriority
-                ? "High-priority complaint"
-                : "New complaint received",
-              message: `${complaint.title || "Complaint"} • ${
-                complaint.location || "Campus"
-              }`,
+              id: `${complaint.complaint_id}-${status}`,
+              complaintId: complaint.complaint_id,
+              title: heading,
+              message,
               time:
                 complaint.updated_at ||
                 complaint.created_at ||
                 new Date().toISOString(),
-              type: isHighPriority ? "warning" : "info",
+              type,
             };
-          }
-        );
+          });
+        } else {
+          items = complaints
+            .filter((complaint) => complaint.status !== "Resolved")
+            .map((complaint) => {
+              const high = isHighPriority(complaint.priority);
+
+              return {
+                id: `admin-${complaint.complaint_id}-${complaint.status || "new"}`,
+                complaintId: complaint.complaint_id,
+                title: high
+                  ? "High-priority complaint"
+                  : "New complaint received",
+                message: `${complaint.title || "Complaint"} • ${
+                  complaint.location || "Campus"
+                }`,
+                time:
+                  complaint.updated_at ||
+                  complaint.created_at ||
+                  new Date().toISOString(),
+                type: high ? "warning" : "info",
+              };
+            });
+        }
 
         items.sort(
-          (a: NotificationItem, b: NotificationItem) =>
-            new Date(b.time).getTime() -
-            new Date(a.time).getTime()
+          (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()
         );
 
-        setNotifications(items.slice(0, 8));
+        if (!cancelled) setNotifications(items.slice(0, 8));
+      } catch {
+        if (!cancelled) setNotifications([]);
+      } finally {
+        if (!cancelled) setLoading(false);
       }
-    } catch {
-      setNotifications([]);
-    } finally {
-      setLoading(false);
     }
-  }
 
-  useEffect(() => {
-    loadNotifications();
+    void loadNotifications();
+    const interval = window.setInterval(loadNotifications, 30000);
 
-    const interval = window.setInterval(
-      loadNotifications,
-      30000
-    );
-
-    return () => window.clearInterval(interval);
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
   }, [role]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (
-        ref.current &&
-        !ref.current.contains(event.target as Node)
-      ) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         setOpen(false);
       }
     }
 
-    document.addEventListener(
-      "mousedown",
-      handleClickOutside
-    );
-
-    return () =>
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutside
-      );
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const unreadCount = useMemo(
-    () =>
-      notifications.filter(
-        (notification) =>
-          !readIds.includes(notification.id)
-      ).length,
+    () => notifications.filter((n) => !readIds.includes(n.id)).length,
     [notifications, readIds]
   );
 
-  function markAsRead(id: string) {
-    const updated = readIds.includes(id)
-      ? readIds
-      : [...readIds, id];
+  function saveRead(ids: string[]) {
+    setReadIds(ids);
+    localStorage.setItem(storageKey, JSON.stringify(ids));
+  }
 
-    setReadIds(updated);
-    localStorage.setItem(
-      storageKey,
-      JSON.stringify(updated)
+  function handleNotificationClick(notification: NotificationItem) {
+    if (!readIds.includes(notification.id)) {
+      saveRead([...readIds, notification.id]);
+    }
+
+    setOpen(false);
+    navigate(
+      role === "student"
+        ? `/student/complaints/${notification.complaintId}`
+        : `/admin/complaints/${notification.complaintId}`
     );
   }
 
   function markAllAsRead() {
-    const ids = notifications.map(
-      (notification) => notification.id
-    );
-
-    setReadIds(ids);
-    localStorage.setItem(
-      storageKey,
-      JSON.stringify(ids)
-    );
+    saveRead(Array.from(new Set([...readIds, ...notifications.map((n) => n.id)])));
   }
 
   function formatTime(value: string) {
     const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-      return "";
-    }
+    if (Number.isNaN(date.getTime())) return "";
 
     return date.toLocaleString("en-IN", {
       day: "2-digit",
@@ -243,9 +214,7 @@ function NotificationBell({ role }: NotificationBellProps) {
                 Notifications
               </h3>
               <p className="text-xs text-slate-500">
-                {unreadCount > 0
-                  ? `${unreadCount} unread`
-                  : "All caught up"}
+                {unreadCount > 0 ? `${unreadCount} unread` : "All caught up"}
               </p>
             </div>
 
@@ -288,17 +257,13 @@ function NotificationBell({ role }: NotificationBellProps) {
               </div>
             ) : (
               notifications.map((notification) => {
-                const unread = !readIds.includes(
-                  notification.id
-                );
+                const unread = !readIds.includes(notification.id);
 
                 return (
                   <button
                     key={notification.id}
                     type="button"
-                    onClick={() =>
-                      markAsRead(notification.id)
-                    }
+                    onClick={() => handleNotificationClick(notification)}
                     className={`flex w-full gap-3 border-b border-slate-100 px-4 py-3 text-left transition hover:bg-slate-50 ${
                       unread ? "bg-slate-50/80" : "bg-white"
                     }`}
