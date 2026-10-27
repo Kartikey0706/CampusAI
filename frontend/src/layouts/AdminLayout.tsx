@@ -4,12 +4,12 @@ import { logout } from "../api";
 import AccountProfile from "../components/layout/AccountProfile";
 import NotificationBell from "../components/layout/NotificationBell";
 
-const nav=[{to:"/admin",label:"Dashboard",icon:LayoutDashboard,end:true},{to:"/admin/complaints",label:"Complaints",icon:ClipboardList},{to:"/admin/departments",label:"Departments",icon:Building2},{to:"/admin/analytics",label:"Analytics",icon:BarChart3},{to:"/admin/settings",label:"Settings",icon:Settings}];
+const nav = [{ to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true }, { to: "/admin/complaints", label: "Complaints", icon: ClipboardList }, { to: "/admin/departments", label: "Departments", icon: Building2 }, { to: "/admin/analytics", label: "Analytics", icon: BarChart3 }, { to: "/admin/settings", label: "Settings", icon: Settings }];
 
-function AdminLayout(){
-  const navigate=useNavigate();
+function AdminLayout() {
+  const navigate = useNavigate();
 
-  function handleLogout(){
+  function handleLogout() {
     logout();
     navigate("/login");
   }
@@ -19,7 +19,7 @@ function AdminLayout(){
       <div className="px-6 py-6">
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600">
-            <ShieldCheck size={18}/>
+            <ShieldCheck size={18} />
           </div>
           <span className="text-xl font-bold">
             Campus<span className="text-indigo-600">AI</span>
@@ -29,14 +29,14 @@ function AdminLayout(){
       </div>
 
       <nav className="flex-1 space-y-1 px-4">
-        {nav.map(({to,label,icon:Icon,end})=>
+        {nav.map(({ to, label, icon: Icon, end }) =>
           <NavLink
             key={to}
             to={to}
             end={end}
-            className={({isActive})=>`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium ${isActive?"bg-indigo-50 text-indigo-700":"text-slate-500 hover:bg-slate-50 hover:text-slate-900"}`}
+            className={({ isActive }) => `flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium ${isActive ? "bg-indigo-50 text-indigo-700" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"}`}
           >
-            <Icon size={18}/>{label}
+            <Icon size={18} />{label}
           </NavLink>
         )}
       </nav>
@@ -58,15 +58,15 @@ function AdminLayout(){
             onClick={handleLogout}
             className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-900"
           >
-            <LogOut size={16}/> Sign out
+            <LogOut size={16} /> Sign out
           </button>
 
-          <AccountProfile/>
+          <AccountProfile />
         </div>
       </header>
 
       <main className="p-4 sm:p-6 lg:p-8">
-        <Outlet/>
+        <Outlet />
       </main>
     </div>
   </div>
