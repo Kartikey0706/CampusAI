@@ -89,6 +89,23 @@ function StudentLayout() {
           </div>
         </header>
 
+        <nav className="flex gap-1 overflow-x-auto border-b border-slate-200 bg-white px-3 py-2 lg:hidden">
+          {nav.map(({ to, label, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                `whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium ${
+                  isActive ? "bg-indigo-50 text-indigo-700" : "text-slate-600"
+                }`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+
         <main className="p-4 sm:p-6 lg:p-8">
           <Outlet />
         </main>
