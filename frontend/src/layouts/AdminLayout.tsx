@@ -18,7 +18,7 @@ function AdminLayout() {
     <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white text-slate-900 lg:flex lg:flex-col">
       <div className="px-6 py-6">
         <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
             <ShieldCheck size={18} />
           </div>
           <span className="text-xl font-bold">
