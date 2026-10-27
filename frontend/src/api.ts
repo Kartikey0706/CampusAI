@@ -27,6 +27,13 @@ async function apiRequest(
     data = {};
   }
 
+  if (response.status === 401 && token) {
+    localStorage.removeItem("campusai_token");
+    localStorage.removeItem("campusai_user");
+    window.location.href = "/login";
+    throw new Error("Session expired. Please log in again.");
+  }
+
   if (!response.ok) {
     throw new Error(data.detail || "Something went wrong");
   }
