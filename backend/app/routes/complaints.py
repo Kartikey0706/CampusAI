@@ -112,21 +112,6 @@ def create_complaint(
         logger.exception("Complaint similarity analysis failed for %s", complaint_id)
         similar_complaints = []
 
-    # Many students reporting the same issue raises its priority.
-    if similar_complaints and analysis.get("urgency") not in (None, "Pending"):
-        try:
-            from app.services.priority_service import calculate_priority_details
-
-            details = calculate_priority_details(
-                analysis["urgency"],
-                complaint_text,
-                analysis.get("category", ""),
-                similar_count=len(similar_complaints),
-            )
-            analysis.update(details)
-        except Exception:
-            logger.exception("Priority refinement failed for %s", complaint_id)
-
     complaint_document.update(analysis)
     complaint_document["similar_complaints"] = similar_complaints
     db["complaints"].update_one(

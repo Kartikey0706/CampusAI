@@ -88,46 +88,9 @@ def calculate_similarity(text1: str, text2: str) -> float:
     return round(float(similarity), 4)
 
 
-# Words that appear in almost every complaint and say nothing about the issue.
-_STOPWORDS = {
-    "is", "are", "was", "were", "am", "the", "a", "an", "of", "in", "on", "at", "to", "for",
-    "and", "or", "my", "our", "we", "i", "it", "this", "that", "there", "here", "with", "has",
-    "have", "had", "be", "been", "not", "no", "nahi", "hai", "hain", "ho", "raha", "rahi",
-    "rahe", "me", "mein", "ka", "ki", "ke", "se", "ko", "par", "pe", "bhi", "aur", "yeh",
-    "ye", "wo", "woh", "kuch", "bahut", "very", "please", "kindly", "since", "from", "ho",
-    "hota", "hoti", "hote", "gaya", "gayi", "kar", "karo", "kr", "rha", "rhi", "hostel",
-    "campus", "college", "working", "work", "problem", "issue", "block",
-}
-
-# Different words that mean the same thing, mapped to one token.
-_SYNONYMS = {
-    "net": "internet", "wifi": "internet", "network": "internet", "wi": "internet",
-    "fi": "internet", "connection": "internet",
-    "paani": "pani", "water": "pani", "tap": "pani", "nal": "pani",
-    "bijli": "electricity", "power": "electricity", "light": "electricity",
-    "lights": "electricity", "current": "electricity",
-    "khana": "food", "khane": "food", "meal": "food", "mess": "food",
-    "kharab": "broken", "damaged": "broken", "faulty": "broken",
-    "band": "down", "stopped": "down", "off": "down",
-}
-
-
-def _content_tokens(text: str) -> list[str]:
-    from app.services.nlp_utils import normalize_text
-
-    tokens = re.findall(r"[a-z0-9]+", normalize_text(text))
-    cleaned = []
-    for token in tokens:
-        token = _SYNONYMS.get(token, token)
-        if token in _STOPWORDS or len(token) < 2:
-            continue
-        cleaned.append(token)
-    return cleaned
-
-
 def _token_similarity(text1: str, text2: str) -> float:
-    tokens1 = _content_tokens(text1)
-    tokens2 = _content_tokens(text2)
+    tokens1 = re.findall(r"[a-z0-9]+", text1.lower())
+    tokens2 = re.findall(r"[a-z0-9]+", text2.lower())
     if not tokens1 or not tokens2:
         return 0.0
 
@@ -217,15 +180,6 @@ def find_similar_complaints(
 
     similar_complaints = []
 
-    # Complaints about different kinds of problems are not duplicates, even if
-    # they share common words ("not working in the hostel").
-    try:
-        from app.services.category_service import predict_category
-
-        new_category = predict_category(complaint_text)
-    except Exception:
-        new_category = "Pending Analysis"
-
     for complaint in existing_complaints:
 
         complaint_id = complaint.get("complaint_id")
@@ -234,14 +188,6 @@ def find_similar_complaints(
         if (
             current_complaint_id
             and complaint_id == current_complaint_id
-        ):
-            continue
-
-        existing_category = complaint.get("category")
-        if (
-            new_category not in (None, "", "Pending Analysis", "Other")
-            and existing_category not in (None, "", "Pending Analysis", "Other")
-            and existing_category != new_category
         ):
             continue
 

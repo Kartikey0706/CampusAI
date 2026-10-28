@@ -14,11 +14,6 @@ CATEGORY_DEPARTMENT = {
     "Mess": "Mess / Catering Department",
     "Library": "Library Administration",
     "Lab": "Lab / Technical Department",
-    "Security": "Security Department",
-    "Ragging": "Anti-Ragging Committee",
-    "Medical": "Medical / Health Centre",
-    "Sanitation": "Housekeeping / Sanitation Department",
-    "Infrastructure": "Civil / Maintenance Department",
     "Other": "General Administration",
 }
 
