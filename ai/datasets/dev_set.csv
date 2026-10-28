@@ -1,0 +1,103 @@
+text,category,urgency,priority
+my laptop cannot connect to the campus network,Wi-Fi,Low,Low
+The wireless network keeps disconnecting,Wi-Fi,Low,Low
+bhai wifi 2 din se band hai poore hostel me kuch nahi ho raha,Wi-Fi,Medium,Medium
+net speed itni slow hai ki mail bhi nahi khulta,Wi-Fi,Low,Low
+hostel wale router ka password change kar diya kisi ne ab connect nahi hota,Wi-Fi,Low,Low
+Internet down in C block since morning exams ki online submission hai aaj,Wi-Fi,Medium,Medium
+wifi bar bar log out ho jata hai,Wi-Fi,Low,Low
+the wifi in lecture hall 3 is useless,Wi-Fi,Low,Low
+There is no water in hostel since 2 days,Water,Medium,High
+Hostel ka paani nahi aa raha,Water,Low,Medium
+pani ka pressure bahut kam hai 4th floor pe,Water,Low,Low
+hamare block me pine ka pani pila aa raha hai aur smell bhi hai,Water,Medium,Medium
+water cooler ke paas leak ho raha hai fisalne ka darr hai,Water,Medium,Medium
+washroom me nal toot gaya hai pani beh raha hai,Water,Low,Low
+geyser ka garam pani nahi aata subah,Water,Low,Low
+Electricity gone and wire is sparking in room 204,Electricity,High,High
+bijli subah se nahi hai poore hostel me kuch kaam nahi ho raha,Electricity,Medium,High
+corridor ki tubelight 1 hafte se kharab hai,Electricity,Medium,Low
+light baar baar flicker karti hai padhai me dikkat hai,Electricity,Medium,Low
+switch board se current lag raha hai chhune pe,Electricity,High,High
+charging socket kaam nahi karta room me,Electricity,Low,Low
+power cut har roz raat ko hota hai,Electricity,Medium,Medium
+Mess food was bad and I felt sick,Mess,High,High
+khane me baal nikla tha aaj,Mess,Low,Low
+mess me roti hamesha thandi milti hai,Mess,Low,Low
+dinner me chicken ki smell aa rahi thi aur kai logo ko stomach pain hua,Mess,High,High
+lunch ki quality gir gayi hai pichle hafte se,Mess,Medium,Low
+mess walo ka behaviour bahut rude hai,Mess,Low,Low
+khane ka time bahut kam hai ek ghante me band ho jata hai,Mess,Low,Low
+sabzi me keeda tha mess ki,Mess,High,High
+I still feel the teacher is not explaining properly,Faculty,Low,Low
+professor class me ek bhi baar nahi aaye is mahine,Faculty,Medium,Medium
+sir marks dene me favoritism karte hain,Faculty,Low,Low
+faculty ne attendance short bata ke mujhe exam se rok diya,Faculty,Medium,Medium
+mam ka teaching speed bahut tez hai kuch samajh nahi aata,Faculty,Low,Low
+The final result is not updated,Academic,Low,Low
+my internal marks are missing on portal,Academic,Low,Low
+exam form ki last date kal hai aur link nahi khul raha,Academic,Medium,High
+revaluation result abhi tak nahi aaya 2 mahine ho gaye,Academic,Medium,Medium
+syllabus aur paper me koi match nahi tha,Academic,Low,Low
+assignment portal pe upload hi nahi hota,Academic,Low,Low
+timetable me Monday ki do classes overlap kar rahi hain,Timetable,Low,Low
+timetable ka PDF purana hai naya update karo,Timetable,Low,Low
+class ka time badal gaya par announcement nahi hui,Timetable,Medium,Low
+lab slot aur lecture ka time same hai,Timetable,Low,Low
+The classroom projector is not working,Classroom,Low,Low
+Classroom fan is not working,Classroom,Low,Low
+The AC in seminar hall is not working,Classroom,Low,Low
+class me bench itne purane hain ki baithne me dar lagta hai,Classroom,Low,Low
+classroom ka board saaf nahi hota marker bhi nahi milta,Classroom,Low,Low
+lecture hall ka mic phir se kharab ho gaya,Classroom,Low,Low
+Books are not available in the library,Library,Low,Low
+library kab tak khulti hai exams ke time late tak kholo,Library,Low,Low
+library me padhne ki jagah nahi bachti,Library,Low,Low
+issued book wapas karne ke baad bhi fine dikha raha hai,Library,Low,Low
+lab me 10 me se 6 computers on hi nahi hote,Lab,Low,Medium
+practical ke liye instruments kam hain,Lab,Low,Low
+chemistry lab me ventilation nahi hai ghutan hoti hai,Lab,Medium,Medium
+lab ke systems me software license expire ho gaya,Lab,Low,Low
+Bus is always busy and late,Transport,Low,Low
+bus driver bahut tez chalata hai dar lagta hai,Transport,High,High
+route 3 ki bus ne aaj phir miss kara di,Transport,Low,Low
+college bus ka pass banwane me bahut time lag raha hai,Transport,Low,Low
+The payment got deducted but fee status is still pending,Fees,Medium,Medium
+scholarship abhi tak account me nahi aayi 3 mahine se,Fees,Medium,Medium
+fee receipt download nahi hoti,Fees,Low,Low
+hostel fee ka reminder aa raha hai jabki maine bhar di hai,Fees,Low,Low
+Rats in the hostel corridor,Sanitation,Low,Low
+hostel ke bathroom me roz safai nahi hoti badbu aati hai,Sanitation,Medium,Medium
+mosquitos bahut hain raat ko sone nahi dete,Sanitation,Low,Low
+dustbin 3 din se saaf nahi hua,Sanitation,Medium,Low
+drain choke hai paani bhar gaya hai gali me,Sanitation,Medium,Medium
+Student ID card not issued,Other,Low,Low
+college fest me stall lagane ki permission kaise milegi,Other,Low,Low
+gym me equipment tutey hue hain,Other,Low,Low
+bonafide certificate kab tak milega,Other,Low,Low
+guard raat ko gate pe nahi hota koi bhi andar aa jata hai,Security,High,High
+meri cycle parking se chori ho gayi,Security,Medium,Medium
+cctv camera band hai corridor ka,Security,Low,Low
+bahar ke log hostel ke andar ghoom rahe the raat ko,Security,High,High
+seniors raat ko room me bula ke pareshan karte hain,Ragging,High,High
+ek ladka mujhe baar baar message karke dhamki deta hai,Ragging,High,High
+first year ko senior force karte hain unke kaam karne ko,Ragging,High,High
+koi mujhe campus me follow karta hai roz,Ragging,High,High
+campus me doctor kab milega timing kya hai,Medical,Low,Low
+mere roommate ko tez bukhar hai kal se aur dispensary band hai,Medical,High,High
+dispensary me paracetamol bhi nahi hai,Medical,Medium,Medium
+class me ek student behosh ho gaya tha first aid kit nahi mila,Medical,High,High
+lift me kal 5 log fas gaye the,Infrastructure,High,High
+library ke samne wali road me bade gaddhe hain,Infrastructure,Low,Medium
+parking ke liye jagah hi nahi bachti,Infrastructure,Low,Low
+room ka lock toot gaya hai,Hostel,Low,Low
+warden se baat karna chahta hu room change ke liye,Hostel,Low,Low
+mere room ke bed me khatmal hain,Hostel,Medium,Medium
+hostel me raat ko bahut shor hota hai neend nahi aati,Hostel,Low,Low
+hostel ki khidki toot gayi hai thand aati hai,Hostel,Low,Low
+hello please help,Other,Low,Low
+kuch samajh nahi aa raha kya karu,Other,Low,Low
+mera naam attendance list me nahi hai,Faculty,Low,Low
+whole campus me bijli nahi hai aur labs me exam chal rahe hain,Electricity,High,High
+sab students bimar pad rahe hain mess ka khana khake,Mess,High,High
+water supply sabhi hostels me band hai 3 din se,Water,Medium,High
