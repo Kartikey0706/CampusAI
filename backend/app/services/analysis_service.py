@@ -1,10 +1,10 @@
 import logging
 
-from app.services.category_service import category_signals, predict_category
+from app.services.category_service import category_signals, predict_category_with_confidence
 from app.services.department_service import get_department
-from app.services.priority_service import calculate_priority
+from app.services.priority_service import calculate_priority_details
 from app.services.sentiment_service import predict_sentiment
-from app.services.urgency_service import predict_urgency
+from app.services.urgency_service import assess_urgency
 
 logger = logging.getLogger(__name__)
 
@@ -23,23 +23,30 @@ def _analysis_reasons(text: str, category: str, urgency: str, sentiment: str) ->
 
 
 def analyze_complaint(text: str) -> dict:
-    category = predict_category(text)
-    urgency = predict_urgency(text)
+    category, confidence, source = predict_category_with_confidence(text)
+    urgency = assess_urgency(text)["urgency"]
     department = "Pending" if category == "Pending Analysis" else get_department(category)
     sentiment = predict_sentiment(text)
     reasons = _analysis_reasons(text, category, urgency, sentiment) if category != "Pending Analysis" else ["No high-confidence category signals detected"]
+    priority = calculate_priority_details(urgency, text, category)
 
     return {
         "category": category or "Other",
         "sentiment": sentiment,
         "urgency": urgency,
         "department": department,
-        "priority": calculate_priority(urgency, text),
+        "priority": priority["priority"],
         "reasons": reasons,
+        "category_confidence": confidence,
+        "category_source": source,
+        "priority_score": priority["priority_score"],
+        "priority_reasons": priority["priority_reasons"],
+        "affected_scope": priority["affected_scope"],
+        "safety_flag": priority["safety_flag"],
     }
 
 
-def safe_analyze_complaint(text: str) -> dict[str, str]:
+def safe_analyze_complaint(text: str) -> dict:
     defaults = {
         "category": "Pending Analysis",
         "sentiment": "Pending",
