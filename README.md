@@ -7,11 +7,9 @@
 ## Live Preview
 
 - **Frontend:** https://campus-ai-sepia.vercel.app/
-- **Backend:** Hosted on Render as `campusai-backend`. The exact service URL and environment variables are managed in the Render dashboard.
-- **API documentation (when the backend is running):** `/docs`
-- **Health check (when the backend is running):** `/health`
+- **Backend:** Hosted on Render as `campusai-backend`.
 
-The frontend is deployed on Vercel and the backend is hosted separately. If a recent GitHub change does not appear on the live site, check the deployment status in Vercel or Render and trigger a manual deploy if required.
+The frontend is deployed on Vercel and the backend is hosted separately.
 
 ## What CampusAI Does
 
@@ -37,7 +35,7 @@ CampusAI uses local Python services to help analyse complaints. Depending on the
 - **Suggested department and priority.**
 - **Similar-complaint matching** to help identify repeated issues.
 
-The system is designed to work without an external LLM API. AI output is advisory; administrators remain responsible for reviewing complaints and making final decisions. If analysis is unavailable, complaint handling should not be treated as a substitute for administrative review.
+The system is designed to work without an external LLM API. AI output is advisory; administrators remain responsible for reviewing complaints and making final decisions.
 
 ## How It Works
 
@@ -62,14 +60,12 @@ MongoDB Atlas
 
 | Area | Technologies |
 | --- | --- |
-| Frontend | React, TypeScript, Vite, Tailwind CSS, React Router |
+| Frontend | React, TypeScript, Vite, Tailwind CSS, React |
 | Backend | Python, FastAPI, Uvicorn, Pydantic |
 | Database | MongoDB Atlas, PyMongo |
 | Authentication | JWT (`python-jose`), password hashing (`passlib`, `bcrypt`) |
 | AI / analysis | scikit-learn, joblib, local category and analysis services |
 | Deployment | Vercel (frontend), Render (backend) |
-
-Semantic similarity can use `sentence-transformers` when available, with a local token-based fallback.
 
 ## Repository Structure
 
